@@ -1,0 +1,34 @@
+<ion-view title="home">
+	<ion-header-bar class="bar-balanced has-tabs-top" align-title="center">
+        <h1 class="title">Makan Mana</h1>
+
+        <a class="button button-balanced icon ion-search" href="#/search"></a>
+        
+        
+      </ion-header-bar>
+
+      <div class="tabs-striped tabs-top tabs-background-balanced tabs-color-light">
+          <div class="tabs">
+            <a class="tab-item" href="#">
+              Breakfast
+            </a>
+            <a class="tab-item" href="#">
+              Lunch
+            </a>
+            <a class="tab-item" href="#">
+              Dinner
+            </a>
+          </div>
+        </div>
+
+	<ion-content ng-controller="AppCtrl" class="has-subheader">
+		<ion-list>
+			<ion-item ng-repeat="restaurant in restaurants" href="#/restaurant">
+				<h2>Restaurant name: {{ restaurant.name }}</h2>
+				<p>Rating: {{ restaurant.rating }}</p>
+				<p>Distance: {{ restaurant.distance }}</p>
+				</a>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

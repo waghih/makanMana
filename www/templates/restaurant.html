@@ -1,0 +1,13 @@
+<ion-view title="Restaurant">
+	<ion-nav-bar class="bar-balanced" align-title="center">
+    <ion-nav-back-button class="button-clear">
+      <i class="on-ios-arrow-back"></i>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-content>
+    <div id="map_canvas" ng-controller="mainCtrl">
+      <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
+    </div>
+  </ion-content>
+</ion-view>
