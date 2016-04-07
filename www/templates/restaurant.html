@@ -6,8 +6,12 @@
   </ion-nav-bar>
 
   <ion-content>
-    <div id="map_canvas" ng-controller="mainCtrl">
-      <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options"></ui-gmap-google-map>
-    </div>
+    <div id="map" data-tap-disabled="true"></div>
+      <ion-item>
+        <h2>{{ restaurant.name }}</h2>
+        <p>Address: {{ restaurant.address }}, {{ restaurant.postalCode }} {{ restaurant.city }}, {{ restaurant.state }}</p>
+        <p>Opening Hours: {{ restaurant.openingHours }}</p>
+        <p>Halal Status: {{ restaurant.halalStatus }}</p>
+      </ion-item>
   </ion-content>
 </ion-view>

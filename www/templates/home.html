@@ -23,10 +23,10 @@
 
 	<ion-content ng-controller="AppCtrl" class="has-subheader">
 		<ion-list>
-			<ion-item ng-repeat="restaurant in restaurants" href="#/restaurant">
-				<h2>Restaurant name: {{ restaurant.name }}</h2>
-				<p>Rating: {{ restaurant.rating }}</p>
-				<p>Distance: {{ restaurant.distance }}</p>
+			<ion-item ng-repeat="item in items" href="#/restaurant/{{item.id}}">
+				<h2>{{ item.name }}</h2>
+				<p>Rating: {{}}</p>
+				<p>Distance: {{ item.distance }}</p>
 				</a>
 			</ion-item>
 		</ion-list>

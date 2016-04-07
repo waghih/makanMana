@@ -3,7 +3,91 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic','ngCordova'])
+
+.controller('AppCtrl',function($scope, $http, HttpService, $ionicLoading, DistanceService){
+
+  // var restaurants = {};
+  $scope.items=[];
+
+  $ionicLoading.show({
+    template: 'Loading...'
+  });
+  
+  HttpService.getRestaurants().then(function(response) {
+      $scope.items = response.data.restaurant_info;
+      $ionicLoading.hide();
+      for(var i=0; i<$scope.items.length; i++ ){
+        $scope.items[i]["distance"] = "calculating...";
+        // $scope.items[i].distance = DistanceService.calculateDistance($scope.items[i].latitude,$scope.items[i].longitude);
+        console.log(DistanceService.calculateDistance($scope.items[i].latitude,$scope.items[i].longitude));       
+      }
+  });
+
+  
+  // $scope.items = restaurants;
+})
+
+.controller('RestaurantCtrl', function($scope, $stateParams, HttpService, $http, $cordovaGeolocation) {
+  
+  $scope.restaurantId = $stateParams.restaurantId;
+  $scope.restaurant = HttpService.getRestaurant($scope.restaurantId);
+  console.log($scope.restaurantId);
+  var distance;
+  var current = {};
+  var options = {timeout: 10000, enableHighAccuracy: true};
+ 
+    var destination = new google.maps.LatLng($scope.restaurant.latitude, $scope.restaurant.longitude);
+ 
+    var mapOptions = {
+      center: destination,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var directionsService = new google.maps.DirectionsService();
+    
+    $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+ 
+    var origin = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    
+    console.log(position.coords.latitude, position.coords.longitude)
+    
+    var request = {
+      origin      : origin, // a city, full address, landmark etc
+      destination : destination,
+      travelMode  : google.maps.DirectionsTravelMode.DRIVING
+    };
+
+    directionsService.route(request, function(response, status) {
+      if ( status == google.maps.DirectionsStatus.OK ) {
+        distance = (response.routes[0].legs[0].distance.value)/1000;
+        alert("Distance: "+distance+" km"); // the distance in metres
+      }
+      else {
+        // oops, there's no route between these two locations
+        // every time this happens, a kitten dies
+        // so please, ensure your address is formatted properly
+      }
+    });
+ 
+    }, function(error){
+      console.log("Could not get location");
+    });
+    
+ 
+    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+ 
+      var marker = new google.maps.Marker({
+          map: $scope.map,
+          animation: google.maps.Animation.DROP,
+          position: destination
+      });      
+     
+    });   
+
+})
 
 .config(function($stateProvider, $urlRouterProvider) {
   "use strict";
@@ -11,11 +95,13 @@ angular.module('starter', ['ionic'])
   $stateProvider
   .state('home', {
     url: '/',
-    templateUrl: 'templates/home.html'
+    templateUrl: 'templates/home.html',
+    controller: 'AppCtrl'
   })
   .state('restaurant',{
-    url:'/restaurant',
-    templateUrl: 'templates/restaurant.html'
+    url:'/restaurant/:restaurantId',
+    templateUrl: 'templates/restaurant.html',
+    controller: 'RestaurantCtrl'
   })
   .state('search', {
     url: '/search',
@@ -24,64 +110,77 @@ angular.module('starter', ['ionic'])
   $urlRouterProvider.otherwise('/');
 })
 
-.controller('AppCtrl',function($scope){
-  $scope.restaurants = [
-    {
-      name: 'DLaman',
-      rating: '4.3',
-      distance: '3.3km'
+.service('HttpService', function($http) {
+  var restaurants = []
+  return {
+    getRestaurants: function() {
+      // $http returns a promise, which has a then function, 
+      // which also returns a promise      
+      return $http.get('http://farooqezhar.com/get.php')
+        .then(function(response) {
+          // In the response resp.data contains the result
+          // check the console to see all of the data returned        
+          // console.log('Get Restaurants', response);
+          restaurants = response.data.restaurant_info;
+          return response;
+       }); 
     },
-    {
-      name: 'Purnamah',
-      rating: '4.0',
-      distance: '3.8km'
-    },
-    {
-      name: 'KFC',
-      rating: '4.6',
-      distance: '5.2km'
-    },
-    {
-      name: 'Pops',
-      rating: '4.7',
-      distance: '10.6km'
-    },
-    {
-      name: 'Simply Western',
-      rating: '4.1',
-      distance: '23.3km'
-    },
-    {
-      name: 'Bangi kopitiam',
-      rating: '4.3',
-      distance: '15.2km'
-    },
-    {
-      name: 'Santai',
-      rating: '3.9',
-      distance: '7.6km'
-    },
-    {
-      name: 'Uniq',
-      rating: '3.8',
-      distance: '1.2km'
-    }
-  ];
-
-  $scope.items = [
-    { id: 1 },
-   { id: 2 },
-   { id: 3 },
-   { id: 4 },
-   { id: 5 },
-   { id: 6 },
-   { id: 7 },
-   { id: 8 },
-   { id: 9 },
-   { id: 10 }
-  ];
+    getRestaurant: function(restaurantId){
+      for(var i=0;i<restaurants.length;i++){
+        if(restaurants[i].id == restaurantId){
+          return restaurants[i];
+          console.log('Get Restaurant', restaurants[i]);
+        }
+      }
+    }    
+  }
 })
 
+.service('DistanceService',function($cordovaGeolocation){
+
+  return{
+    calculateDistance: function(latitude, longitude){
+      var distance;
+      var options = {timeout: 50000, enableHighAccuracy: true};
+ 
+      var destination = new google.maps.LatLng(latitude,longitude);
+
+      var directionsService = new google.maps.DirectionsService();
+    
+      $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+ 
+      var origin = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    
+      console.log(position.coords.latitude, position.coords.longitude)
+    
+      var request = {
+      origin      : origin, // a city, full address, landmark etc
+      destination : destination,
+      travelMode  : google.maps.DirectionsTravelMode.DRIVING
+      };
+
+      directionsService.route(request, function(response, status) {
+      console.log(status);
+      console.log(google.maps.DirectionsStatus.OK)
+      if ( status == google.maps.DirectionsStatus.OK ) {
+        distance = (response.routes[0].legs[0].distance.value)/1000;
+        console.log(distance);
+        return distance;
+      }
+      else {
+        console.log("error")
+        // oops, there's no route between these two locations
+        // every time this happens, a kitten dies
+        // so please, ensure your address is formatted properly
+      }
+    });
+ 
+    }, function(error){
+      console.log("Could not get location");
+    });
+    }
+  }
+})
 // .controller('MapController', function($scope, $ionicLoading) {
  
 //     google.maps.event.addDomListener(window, 'load', function() {
@@ -117,10 +216,6 @@ angular.module('starter', ['ionic'])
 //     });
 // })
 
-.controller('mainCtrl', function($scope) {
-        $scope.map = {center: {latitude: 51.219053, longitude: 4.404418 }, zoom: 14 };
-        $scope.options = {scrollwheel: false};
-})
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
