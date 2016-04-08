@@ -16,13 +16,18 @@ angular.module('starter', ['ionic','ngCordova'])
   
   HttpService.getRestaurants().then(function(response) {
       $scope.items = response.data.restaurant_info;
+      console.log(response.data.restaurant_info);
       $ionicLoading.hide();
       for(var i=0; i<$scope.items.length; i++ ){
         $scope.items[i]["distance"] = "calculating...";
-        // $scope.items[i].distance = DistanceService.calculateDistance($scope.items[i].latitude,$scope.items[i].longitude);
-        console.log(DistanceService.calculateDistance($scope.items[i].latitude,$scope.items[i].longitude));       
+        DistanceService.calculateDistance($scope.items[i].latitude,$scope.items[i].longitude, function(response){
+          $scope.items[i].distance = "response";
+        });
+        // console.log(DistanceService.calculateDistance($scope.items[i].latitude,$scope.items[i].longitude));      
       }
   });
+
+
 
   
   // $scope.items = restaurants;
@@ -139,7 +144,7 @@ angular.module('starter', ['ionic','ngCordova'])
 .service('DistanceService',function($cordovaGeolocation){
 
   return{
-    calculateDistance: function(latitude, longitude){
+    calculateDistance: function(latitude, longitude, callback){
       var distance;
       var options = {timeout: 50000, enableHighAccuracy: true};
  
@@ -165,7 +170,9 @@ angular.module('starter', ['ionic','ngCordova'])
       if ( status == google.maps.DirectionsStatus.OK ) {
         distance = (response.routes[0].legs[0].distance.value)/1000;
         console.log(distance);
+        callback(distance);
         return distance;
+         // distance;
       }
       else {
         console.log("error")
