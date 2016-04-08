@@ -6,36 +6,41 @@
 angular.module('starter', ['ionic','ngCordova'])
 
 .controller('AppCtrl',function($scope, HttpService, $ionicLoading, DistanceService){
-
   $scope.items = [];
+
   $ionicLoading.show({
     template: 'Loading...'
   });
-  
-  HttpService.getRestaurants().then(function(response) {
-      $scope.items = response.data.restaurant_info;
-      console.log(response.data.restaurant_info);
-      $ionicLoading.hide();
-      calculateDistance();
-      console.log($scope.items);
-  });
 
-  var calculateDistance = function() {
+  DistanceService.getLocation(function() {
+    HttpService.getRestaurants().then(function(response) {
+        $scope.items = response.data.restaurant_info;
+        console.log(response.data.restaurant_info);
+        kiraDistance();
+        $ionicLoading.hide();
+        console.log($scope.items);
+    });
+  })
+  
+  var kiraDistance = function() {
     for(var i=0; i<$scope.items.length; i++ ){
       $scope.items[i].distance = "calculating...";
 
       (function(i) {
         // setTimeout(function() {
-          DistanceService.calculateDistance($scope.items[i].latitude, $scope.items[i].longitude,
-            (function(item){
-              return function(distance){
-                item.distance = distance + " km";
-                // item.distance = "";
-              }
-            })($scope.items[i])
-          );
-        // }, i*100);
+        DistanceService.calculateDistance($scope.items[i].latitude, $scope.items[i].longitude,
+          (function(item){
+            return function(distance){
+              item.distance = distance;
+              console.log(item.distance);
+              // item.distance = "";
+              console.log($scope.items[i].distance) 
+            }
+          })($scope.items[i])
+        );
+         // }, i*120);
       })(i)
+
         // $scope.items[i].distance = DistanceService.calculateDistance($scope.items[i].latitude,$scope.items[i].longitude);
         // console.log(DistanceService.calculateDistance($scope.items[i].latitude,$scope.items[i].longitude));
     }
@@ -151,44 +156,70 @@ angular.module('starter', ['ionic','ngCordova'])
   }
 })
 
-.service('DistanceService',function($cordovaGeolocation){
+.factory('DistanceService',function($cordovaGeolocation){
+  
   var originLatitude;
   var originLongitude;
-  var distance;
-  var options = {timeout: 10000, enableHighAccuracy: true};
+  var origin = (0,0);
 
   return{
-    ready: function() {
-      return originLatitude != undefined;
-    },
-    setup: function() {
+    getLocation: function(callback) {
+      var options = {timeout: 10000, enableHighAccuracy: false};
 
       $cordovaGeolocation.getCurrentPosition(options).then(function(position){
-           
+               
         originLatitude = position.coords.latitude;
         originLongitude = position.coords.longitude;
+
+        origin = new google.maps.LatLng(originLatitude,originLongitude);
               
-        console.log(position.coords.latitude, position.coords.longitude)
+        callback();
               
         }, function(error){
             console.log("Could not get location");
         }
       );
     },
+    // calculateDistance:function(latitude,longitude,callback){
+
+    //   var destination = new google.maps.LatLng(latitude,longitude);
+    //   var request = {
+    //     origin      : origin, // a city, full address, landmark etc
+    //     destination : destination,
+    //     travelMode  : google.maps.DirectionsTravelMode.DRIVING
+    //   };
+
+    //   var directionsService = new google.maps.DirectionsService();
+
+    //   directionsService.route(request, function(response, status) {
+    //     // console.log(status);
+    //     // console.log(google.maps.DirectionsStatus.OK)
+    //     if ( status == google.maps.DirectionsStatus.OK ) {
+    //       distance = (response.routes[0].legs[0].distance.value)/1000;
+    //       // console.log(distance);
+    //       callback(distance);
+    //       return distance;
+    //     }
+    //     else {
+    //       console.log("error")
+    //       // oops, there's no route between these two locations
+    //       // every time this happens, a kitten dies
+    //       // so please, ensure your address is formatted properly
+    //     }
+    //   });
+    // }
     calculateDistance:function(latitude,longitude,callback){
-      console.log("asf")
-          var R = 6371; // Radius of the earth in km
-          var dLat = deg2rad(latitude-originLatitude);  // deg2rad below
-          var dLon = deg2rad(longitude-originLongitude); 
-          var a = Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(deg2rad(originLatitude))*Math.cos(deg2rad(latitude))*Math.sin(dLon/2) * Math.sin(dLon/2);
-          var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-          var d = R * c; // Distance in km
-          console.log(d);
-          callback(d);
-          function deg2rad(deg) {
-            return deg * (Math.PI/180)
-          }
-          return d;
+      var R = 6371; // Radius of the earth in km
+      var dLat = deg2rad(latitude-originLatitude);  // deg2rad below
+      var dLon = deg2rad(longitude-originLongitude); 
+      var a = Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(deg2rad(originLatitude))*Math.cos(deg2rad(latitude))*Math.sin(dLon/2) * Math.sin(dLon/2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      var d = R * c; // Distance in km
+      callback((d*1.6));
+      function deg2rad(deg) {
+        return deg * (Math.PI/180)
+      }
+      return d;
     }
   }
 })
@@ -327,7 +358,7 @@ angular.module('starter', ['ionic','ngCordova'])
 // })
 
 
-.run(function($ionicPlatform, DistanceService) {
+.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -342,6 +373,5 @@ angular.module('starter', ['ionic','ngCordova'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-    DistanceService.setup();
   });
 });

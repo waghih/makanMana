@@ -23,10 +23,10 @@
 
 	<ion-content class="has-subheader">
 		<ion-list>
-			<ion-item ng-repeat="item in items" href="#/restaurant/{{item.id}}">
+			<ion-item ng-repeat="item in items | orderBy:'distance':reverse" href="#/restaurant/{{item.id}}">
 				<h2>{{ item.name }}</h2>
 				<p>Rating: {{}}</p>
-				<p>Distance: {{ item.distance }}</p>
+				<p>Distance: {{ item.distance.toFixed(3) }} km</p>
 				</a>
 			</ion-item>
 		</ion-list>
