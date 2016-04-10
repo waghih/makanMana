@@ -47,6 +47,15 @@ angular.module('app.controllers', [])
   
   $scope.restaurantId = $stateParams.restaurantId;
   $scope.restaurant = HttpService.getRestaurant($scope.restaurantId);
+  $scope.showReview = function(){
+    HttpService.getRestaurantReview($scope.restaurantId).then(function(response){
+      $scope.reviews = response.data.result;
+    });
+  }
+  $scope.showReview();
+
+  console.log($scope.reviews);
+   
   console.log($scope.restaurantId);
   // var distance;
   // var options = {timeout: 10000, enableHighAccuracy: true};

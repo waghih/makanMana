@@ -2,11 +2,12 @@ angular.module('app.services', [])
 
 .service('HttpService', function($http) {
   var restaurants = []
+  var baseUrl = 'http://farooqezhar.com/'
   return {
     getRestaurants: function() {
       // $http returns a promise, which has a then function, 
       // which also returns a promise      
-      return $http.get('http://farooqezhar.com/get.php')
+      return $http.get(baseUrl+'get.php')
         .then(function(response) {
           // In the response resp.data contains the result
           // check the console to see all of the data returned        
@@ -22,6 +23,14 @@ angular.module('app.services', [])
           console.log('Get Restaurant', restaurants[i]);
         }
       }
+    },
+    getRestaurantReview: function(restaurantId){
+        return $http.get(baseUrl+'getReview.php?id='+restaurantId)
+        .then(function(response){
+          // return response;
+          console.log(response);
+          return response;
+        });
     }    
   }
 })
