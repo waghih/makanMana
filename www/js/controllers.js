@@ -40,10 +40,15 @@ angular.module('app.controllers', [])
         // console.log(DistanceService.calculateDistance($scope.items[i].latitude,$scope.items[i].longitude));
     }
   }
+
+  $scope.rating = {};
+  $scope.rating.rate = 3.2;
+  $scope.rating.max = 5;
+  $scope.readOnly = true;
   // $scope.items = restaurants;
 })
 
-.controller('RestaurantCtrl', function($scope, $stateParams, HttpService, $http, $cordovaGeolocation) {
+.controller('RestaurantCtrl', function($scope, $stateParams, HttpService, $http, $cordovaGeolocation, DistanceService) {
   
   $scope.restaurantId = $stateParams.restaurantId;
   $scope.restaurant = HttpService.getRestaurant($scope.restaurantId);
@@ -57,6 +62,8 @@ angular.module('app.controllers', [])
   console.log($scope.reviews);
    
   console.log($scope.restaurantId);
+
+  $scope.distance = DistanceService.calculateSingleDistance($scope.restaurant.latitude,$scope.restaurant.longitude);
   // var distance;
   // var options = {timeout: 10000, enableHighAccuracy: true};
  

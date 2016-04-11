@@ -1,6 +1,6 @@
 angular.module('app.services', [])
 
-.service('HttpService', function($http) {
+.factory('HttpService', function($http) {
   var restaurants = []
   var baseUrl = 'http://farooqezhar.com/'
   return {
@@ -35,7 +35,7 @@ angular.module('app.services', [])
   }
 })
 
-.factory('DistanceService',function($cordovaGeolocation){
+.service('DistanceService',function($cordovaGeolocation){
   
   var originLatitude;
   var originLongitude;
@@ -95,6 +95,18 @@ angular.module('app.services', [])
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
       var d = R * c; // Distance in km
       callback((d*1.6));
+      function deg2rad(deg) {
+        return deg * (Math.PI/180)
+      }
+      return d;
+    },
+    calculateSingleDistance:function(latitude,longitude){
+      var R = 6371; // Radius of the earth in km
+      var dLat = deg2rad(latitude-originLatitude);  // deg2rad below
+      var dLon = deg2rad(longitude-originLongitude); 
+      var a = Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(deg2rad(originLatitude))*Math.cos(deg2rad(latitude))*Math.sin(dLon/2) * Math.sin(dLon/2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      var d = (R * c)*1.6; // Distance in km
       function deg2rad(deg) {
         return deg * (Math.PI/180)
       }

@@ -12,6 +12,8 @@
         <p>Address: {{ restaurant.address }}, {{ restaurant.postalCode }} {{ restaurant.city }}, {{ restaurant.state }}</p>
         <p>Opening Hours: {{ restaurant.openingHours }}</p>
         <p>Halal Status: {{ restaurant.halalStatus }}</p>
+        <p>Distances: {{ distance.toFixed(3) }}</p>
+
       </ion-item>
       <ion-list>
         <ion-item ng-repeat="review in reviews">
