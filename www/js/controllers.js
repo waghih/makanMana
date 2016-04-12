@@ -42,7 +42,6 @@ angular.module('app.controllers', [])
   }
 
   $scope.rating = {};
-  $scope.rating.rate = 3.2;
   $scope.rating.max = 5;
   $scope.readOnly = true;
   // $scope.items = restaurants;
