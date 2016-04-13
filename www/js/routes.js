@@ -28,6 +28,11 @@ angular.module('app.routes', [])
     url:'/ratingForm/:restaurantId',
     templateUrl: 'templates/ratingForm.html',
     controller: 'RatingCtrl'
+  })
+  .state('reviews',{
+    url:'/reviews/:restaurantId',
+    templateUrl: 'templates/reviews.html',
+    controller: 'ReviewCtrl'
   });
   $urlRouterProvider.otherwise('/'); 
 

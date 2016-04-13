@@ -146,3 +146,20 @@ angular.module('app.controllers', [])
   // }
   
 })
+
+.controller('ReviewCtrl',function($scope, $stateParams, $state, HttpService, $ionicLoading){
+
+  $scope.restaurantId = $stateParams.restaurantId;
+  $ionicLoading.show({
+    template: 'Loading...'
+  });
+  
+  $scope.showReview = function(){
+    HttpService.getRestaurantReview($scope.restaurantId).then(function(response){
+      $scope.reviews = response.data.result;
+        $ionicLoading.hide();
+    });
+  }
+  $scope.showReview();
+
+})

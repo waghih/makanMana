@@ -1,0 +1,16 @@
+<ion-view title="Reviews">
+	<ion-nav-bar class="bar-balanced" align-title="center">
+    <ion-nav-back-button class="button-clear">
+      <i class="on-ios-arrow-back"></i>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="review in reviews">
+          <p>{{review.name}}</p>
+          <p>{{review.description}}</p>
+      </ion-item>
+    </ion-list> 
+  </ion-content>
+</ion-view>
