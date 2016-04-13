@@ -22,12 +22,15 @@
         <h3> {{ distance.toFixed(3) }} </h3>
     </ion-item>
     <ion-list>
-      <ion-item ng-repeat="review in reviews">
+      <ion-item ng-repeat="review in reviews | limitTo:3">
           <p>{{review.name}}</p>
           <p>{{review.description}}</p>
       </ion-item>
     </ion-list>
-    <ion-item><a class="button button-balanced button-block" href="#/ratingForm/{{restaurant.id}}">Trigger modal</a></ion-item>
+     <ion-item>
+        <a class="button button-clear button-balanced" href="#/reviews/{{restaurant.id}}">View All Reviews</a>
+      </ion-item>
+    <ion-item><a class="button button-balanced button-block" href="#/ratingForm/{{restaurant.id}}">Post Review</a></ion-item>
     
   </ion-content>
 </ion-view>
