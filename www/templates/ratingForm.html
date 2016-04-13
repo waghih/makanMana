@@ -6,7 +6,8 @@
   </ion-nav-bar>
 
   <ion-content>
-    <rating ng-model="rating.rate" max="rating.max"></rating>
+    <ion-item class="formItem"><rating ng-model="rating.rate" max="rating.max"></rating>
+    
     <form class="list" name="ratingForm">
       <label class="item item-input item-floating-label" name="latitude">
           <span class="input-label">Name:</span>
@@ -18,7 +19,6 @@
       </label>      
     </form>
     <a ng-disabled="ratingForm.$invalid" ng-click="saveReview()" id="getLocation-button2" class="button button-balanced  button-block">Save!</a>
-    {{reviewer}}, 
-    {{reviewDescription}}
+    </ion-item>
   </ion-content>
 </ion-view>
