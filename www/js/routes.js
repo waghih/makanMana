@@ -23,6 +23,11 @@ angular.module('app.routes', [])
   .state('search', {
     url: '/search',
     templateUrl: 'templates/search.html'
+  })
+  .state('ratingForm',{
+    url:'/ratingForm/:restaurantId',
+    templateUrl: 'templates/ratingForm.html',
+    controller: 'RatingCtrl'
   });
   $urlRouterProvider.otherwise('/'); 
 

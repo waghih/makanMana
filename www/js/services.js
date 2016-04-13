@@ -25,12 +25,16 @@ angular.module('app.services', [])
       }
     },
     getRestaurantReview: function(restaurantId){
-        return $http.get(baseUrl+'getReview.php?id='+restaurantId)
-        .then(function(response){
-          // return response;
-          console.log(response);
-          return response;
-        });
+      return $http.get(baseUrl+'getReview.php?id='+restaurantId)
+      .then(function(response){
+        // return response;
+        console.log(response);
+        return response;
+      });
+    },
+    createReview:function(reviewData){
+      console.log(reviewData);
+      return $http.get(baseUrl+'addReview.php?name='+reviewData.name+'&rating='+reviewData.rating+'&description='+reviewData.description+'&restaurant_id='+reviewData.restaurant_id);
     }    
   }
 })

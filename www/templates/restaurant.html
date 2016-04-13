@@ -7,19 +7,20 @@
 
   <ion-content>
     <div id="map" data-tap-disabled="true"></div>
-      <ion-item>
-        <h2>{{ restaurant.name }}</h2>
-        <p>Address: {{ restaurant.address }}, {{ restaurant.postalCode }} {{ restaurant.city }}, {{ restaurant.state }}</p>
-        <p>Opening Hours: {{ restaurant.openingHours }}</p>
-        <p>Halal Status: {{ restaurant.halalStatus }}</p>
-        <p>Distances: {{ distance.toFixed(3) }}</p>
+    <ion-item>
+      <h2>{{ restaurant.name }}</h2>
+      <p>Address: {{ restaurant.address }}, {{ restaurant.postalCode }} {{ restaurant.city }}, {{ restaurant.state }}</p>
+      <p>Opening Hours: {{ restaurant.openingHours }}</p>
+      <p>Halal Status: {{ restaurant.halalStatus }}</p>
+      <p>Distances: {{ distance.toFixed(3) }}</p>
 
+    </ion-item>
+    <ion-list>
+      <ion-item ng-repeat="review in reviews">
+          <p>{{review.name}}</p>
+          <p>{{review.description}}</p>
       </ion-item>
-      <ion-list>
-        <ion-item ng-repeat="review in reviews">
-            <p>{{review.name}}</p>
-            <p>{{review.description}}</p>
-        </ion-item>
-      </ion-list>
+    </ion-list>
+    <a class="button button-balanced button-block" href="#/ratingForm/{{restaurant.id}}">Trigger modal</a>
   </ion-content>
 </ion-view>

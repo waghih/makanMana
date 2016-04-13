@@ -28,7 +28,6 @@ angular.module('app.controllers', [])
             return function(distance){
               item.distance = distance;
               console.log(item.distance);
-              // item.distance = "";
               console.log($scope.items[i].distance) 
             }
           })($scope.items[i])
@@ -47,13 +46,18 @@ angular.module('app.controllers', [])
   // $scope.items = restaurants;
 })
 
-.controller('RestaurantCtrl', function($scope, $stateParams, HttpService, $http, $cordovaGeolocation, DistanceService) {
+.controller('RestaurantCtrl', function($scope, $stateParams, HttpService, $http, $cordovaGeolocation, DistanceService, $ionicLoading) {
+
+  $ionicLoading.show({
+    template: 'Loading...'
+  });
   
   $scope.restaurantId = $stateParams.restaurantId;
   $scope.restaurant = HttpService.getRestaurant($scope.restaurantId);
   $scope.showReview = function(){
     HttpService.getRestaurantReview($scope.restaurantId).then(function(response){
       $scope.reviews = response.data.result;
+        $ionicLoading.hide();
     });
   }
   $scope.showReview();
@@ -63,16 +67,14 @@ angular.module('app.controllers', [])
   console.log($scope.restaurantId);
 
   $scope.distance = DistanceService.calculateSingleDistance($scope.restaurant.latitude,$scope.restaurant.longitude);
-  // var distance;
-  // var options = {timeout: 10000, enableHighAccuracy: true};
  
-    var destination = new google.maps.LatLng($scope.restaurant.latitude, $scope.restaurant.longitude);
- 
-    var mapOptions = {
-      center: destination,
-      zoom: 16,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+  var destination = new google.maps.LatLng($scope.restaurant.latitude, $scope.restaurant.longitude);
+
+  var mapOptions = {
+    center: destination,
+    zoom: 16,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
 
   //   var directionsService = new google.maps.DirectionsService();
     
@@ -105,15 +107,42 @@ angular.module('app.controllers', [])
   //   });
     
  
-    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    google.maps.event.addListenerOnce($scope.map, 'idle', function(){
- 
-      var marker = new google.maps.Marker({
-          map: $scope.map,
-          animation: google.maps.Animation.DROP,
-          position: destination
-      });      
-     
-    });   
+  $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  google.maps.event.addListenerOnce($scope.map, 'idle', function(){
 
+    var marker = new google.maps.Marker({
+        map: $scope.map,
+        animation: google.maps.Animation.DROP,
+        position: destination
+    });      
+   
+  });  
+
+})
+
+.controller('RatingCtrl',function($scope, $stateParams, $state, $ionicHistory, HttpService){
+  $scope.restaurantId = $stateParams.restaurantId;
+  $scope.reviewer = '';
+  $scope.reviewDescription = '';
+  $scope.rating = {};
+  $scope.rating.max = 5;
+  $scope.rating.rate = 0;
+  $scope.reviewData = [];
+
+  $scope.saveReview = function() {
+    $scope.reviewData.push({
+      restaurant_id: $scope.restaurantId,
+      name: $scope.reviewer,
+      description: $scope.reviewDescription,
+      rating: $scope.rating.rate,
+    });
+    HttpService.createReview($scope.reviewData);
+    // console.log($scope.reviewData);
+    $ionicHistory.goBack();
+  }
+
+  // $scope.checkRate = function(){
+  //   console.log($scope.rating.rate);  
+  // }
+  
 })
