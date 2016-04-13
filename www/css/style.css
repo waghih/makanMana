@@ -35,3 +35,7 @@
 .formItem ul.rating{
     font-size: 36px;
 }
+.date{
+    display:inline;
+    float:right;
+}
