@@ -6,13 +6,20 @@
   </ion-nav-bar>
 
   <ion-content>
+    <ion-item>
+      <h2> {{ restaurant.name }} </h2>
+    </ion-item>
+    
     <div id="map" data-tap-disabled="true"></div>
       <ion-item>
-        <h2>{{ restaurant.name }}</h2>
-        <p>Address: {{ restaurant.address }}, {{ restaurant.postalCode }} {{ restaurant.city }}, {{ restaurant.state }}</p>
-        <p>Opening Hours: {{ restaurant.openingHours }}</p>
-        <p>Halal Status: {{ restaurant.halalStatus }}</p>
-        <p>Distances: {{ distance.toFixed(3) }}</p>
+        <p>Address: </p>
+        <h3> {{ restaurant.address }}, {{ restaurant.postalCode }} {{ restaurant.city }}, {{ restaurant.state }} </h3>
+        <p>Opening Hours: </p>
+        <h3> {{ restaurant.openingHours }} </h3>
+        <p>Halal Status: </p>
+        <h3> {{ restaurant.halalStatus }} </h3>
+        <p>Distances: </p>
+        <h3> {{ distance.toFixed(3) }} </h3>
 
       </ion-item>
       <ion-list>
