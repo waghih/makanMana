@@ -48,6 +48,7 @@ angular.module('app.controllers', [])
 
 .controller('RestaurantCtrl', function($scope, $stateParams, HttpService, $http, $cordovaGeolocation, DistanceService, $ionicLoading) {
 
+
   $ionicLoading.show({
     template: 'Loading...'
   });
@@ -120,30 +121,38 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('RatingCtrl',function($scope, $stateParams, $state, $ionicHistory, HttpService){
-  $scope.restaurantId = $stateParams.restaurantId;
-  $scope.reviewer = '';
-  $scope.reviewDescription = '';
+.controller('RatingCtrl',function($scope, $filter, $stateParams, $state, $ionicHistory, HttpService){
+  $scope.rating = [];
+  $scope.restaurantId = parseInt($stateParams.restaurantId);
+  $scope.rating.reviewer = '';
+  $scope.rating.reviewDescription = '';
   $scope.rating = {};
   $scope.rating.max = 5;
   $scope.rating.rate = 0;
   $scope.reviewData = [];
+  $scope.date = $filter('date')(new Date(), 'yyyy-MM-dd');
+  console.log($scope.date);
+
 
   $scope.saveReview = function() {
-    $scope.reviewData.push({
+    // $scope.reviewData({
+    //   restaurant_id: $scope.restaurantId,
+    //   name: $scope.rating.reviewer,
+    //   description: $scope.rating.reviewDescription,
+    //   rating: $scope.rating.rate
+    // });
+    HttpService.createReview({
       restaurant_id: $scope.restaurantId,
-      name: $scope.reviewer,
-      description: $scope.reviewDescription,
+      name: $scope.rating.reviewer,
+      description: $scope.rating.reviewDescription,
       rating: $scope.rating.rate,
+      date: $scope.date
     });
-    HttpService.createReview($scope.reviewData);
-    // console.log($scope.reviewData);
+    console.log($scope.reviewData);
     $ionicHistory.goBack();
   }
 
-  // $scope.checkRate = function(){
-  //   console.log($scope.rating.rate);  
-  // }
+  // alert($scope.today);
   
 })
 

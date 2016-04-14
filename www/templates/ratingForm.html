@@ -11,11 +11,11 @@
     <form class="list" name="ratingForm">
       <label class="item item-input item-floating-label" name="latitude">
           <span class="input-label">Name:</span>
-          <input required ng-model="$parent.reviewer" type="text" placeholder="Name:">
+          <input required ng-model="rating.reviewer" type="text" placeholder="Name:">
       </label>
       <label class="item item-input item-floating-label" name="longitude">
           <span class="input-label">Review:</span>
-          <input required ng-model="$parent.reviewDescription" type="text" placeholder="Your Review:">
+          <input required ng-model="rating.reviewDescription" type="text" placeholder="Your Review:">
       </label>      
     </form>
     <a ng-disabled="ratingForm.$invalid" ng-click="saveReview()" id="getLocation-button2" class="button button-balanced  button-block">Save!</a>

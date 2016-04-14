@@ -34,7 +34,11 @@ angular.module('app.services', [])
     },
     createReview:function(reviewData){
       console.log(reviewData);
-      return $http.get(baseUrl+'addReview.php?name='+reviewData.name+'&rating='+reviewData.rating+'&description='+reviewData.description+'&restaurant_id='+reviewData.restaurant_id);
+      return $http.post(baseUrl+'addReview.php',reviewData,{
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;'
+          }
+      });
     }    
   }
 })
