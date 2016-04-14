@@ -22,14 +22,30 @@
         </div>
 
 	<ion-content class="has-subheader">
-		<ion-list>
-			<ion-item ng-repeat="item in items | orderBy:'distance':reverse" href="#/restaurant/{{item.id}}">
+			<ion-list class="customCard" ng-repeat="item in items | orderBy:'distance':reverse" href="#/restaurant/{{item.id}}">
+        <div class="list card customCard">
+
+          <div class="item">
+            <h2>{{ item.name }}</h2>
+            <p>Distance: {{ item.distance.toFixed(3) }} km</p>
+          </div>
+
+          <div class="item item-image">
+            <img src="http://www.julios.co.za/wp-content/uploads/2012/10/restaurant.jpeg">
+          </div>
+
+          <!-- <a class="item item-icon-left assertive" href="#"> -->
+          <div class="item">
+            <h1>{{item.rating}}   <span><i class="customIcon icon ion-star assertive"></i></span></h1>
+          </div>
       
-				<h2>{{ item.name }}</h2>
-				<rating ng-model="item.rating" max="rating.max" readonly="readOnly"></rating>
-				<p>Distance: {{ item.distance.toFixed(3) }} km</p>
-				</a>
-			</ion-item>
+
+        </div>
+
+
+				<!-- <rating ng-model="item.rating" max="rating.max" readonly="readOnly"></rating> -->
+				<!-- </a> -->
+			<!-- </ion-item> -->
 		</ion-list>
 	</ion-content>
 </ion-view>

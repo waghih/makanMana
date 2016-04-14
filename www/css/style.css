@@ -1,4 +1,16 @@
 /* Empty. Add your own CSS if you like */
+.item-content{
+    padding:0px !important;
+}
+
+.customIcon{
+    font-size: 22px !important;
+}
+
+.customCard{
+    border-bottom:none;
+    margin-bottom: 5px !important;
+}
 
 .list-item{
 	border-bottom:2px solid #ddd;

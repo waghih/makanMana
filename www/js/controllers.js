@@ -47,7 +47,9 @@ angular.module('app.controllers', [])
 })
 
 .controller('RestaurantCtrl', function($scope, $stateParams, HttpService, $http, $cordovaGeolocation, DistanceService, $ionicLoading) {
-
+  $scope.rating = {};
+  $scope.rating.max = 5;
+  $scope.readOnly = true;
 
   $ionicLoading.show({
     template: 'Loading...'
@@ -157,7 +159,9 @@ angular.module('app.controllers', [])
 })
 
 .controller('ReviewCtrl',function($scope, $stateParams, $state, HttpService, $ionicLoading){
-
+  $scope.rating = {};
+  $scope.rating.max = 5;
+  $scope.readOnly = true;
   $scope.restaurantId = $stateParams.restaurantId;
   $ionicLoading.show({
     template: 'Loading...'
