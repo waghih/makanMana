@@ -22,7 +22,7 @@
         </div>
 
 	<ion-content class="has-subheader">
-			<ion-list class="customCard" ng-repeat="item in items | orderBy:'distance':reverse" href="#/restaurant/{{item.id}}">
+			<ion-item class="customCard" ng-repeat="item in items | orderBy:'distance':reverse" href="#/restaurant/{{item.id}}">
         <div class="list card customCard">
 
           <div class="item">
@@ -45,7 +45,7 @@
 
 				<!-- <rating ng-model="item.rating" max="rating.max" readonly="readOnly"></rating> -->
 				<!-- </a> -->
-			<!-- </ion-item> -->
-		</ion-list>
+			</ion-item>
+		<!-- </ion-list> -->
 	</ion-content>
 </ion-view>
