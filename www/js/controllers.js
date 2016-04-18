@@ -20,7 +20,7 @@ angular.module('app.controllers', [])
   var kiraDistance = function() {
     for(var i=0; i<$scope.items.length; i++ ){
       $scope.items[i].distance = "calculating...";
-
+      $scope.items[i].rating = parseFloat($scope.items[i].rating);
       (function(i) {
         // setTimeout(function() {
         DistanceService.calculateDistance($scope.items[i].latitude, $scope.items[i].longitude,
@@ -50,6 +50,7 @@ angular.module('app.controllers', [])
   $scope.rating = {};
   $scope.rating.max = 5;
   $scope.readOnly = true;
+  $scope.reviews = {};
 
   $ionicLoading.show({
     template: 'Loading...'
@@ -60,7 +61,9 @@ angular.module('app.controllers', [])
   $scope.showReview = function(){
     HttpService.getRestaurantReview($scope.restaurantId).then(function(response){
       $scope.reviews = response.data.result;
-        $ionicLoading.hide();
+      $scope.totalReviewer = $scope.reviews.length;
+      $ionicLoading.hide();
+      console.log($scope.totalReviewer);
     });
   }
   $scope.showReview();
@@ -68,6 +71,8 @@ angular.module('app.controllers', [])
   console.log($scope.reviews);
    
   console.log($scope.restaurantId);
+
+  $scope.totalReviewer = 
 
   $scope.distance = DistanceService.calculateSingleDistance($scope.restaurant.latitude,$scope.restaurant.longitude);
  

@@ -5,17 +5,17 @@
         <a class="button button-balanced icon ion-search" href="#/search"></a>
         
         
-      </ion-header-bar>
+  </ion-header-bar>
 
       <div class="tabs-striped tabs-top tabs-background-balanced tabs-color-light">
           <div class="tabs">
-            <a class="tab-item" href="#">
+            <a class="tab-item" href="#/home/breakfast">
               Breakfast
             </a>
-            <a class="tab-item" href="#">
+            <a class="tab-item" href="#/home/lunch">
               Lunch
             </a>
-            <a class="tab-item" href="#">
+            <a class="tab-item" href="#/home/dinner">
               Dinner
             </a>
           </div>
@@ -34,9 +34,8 @@
             <img src="http://www.julios.co.za/wp-content/uploads/2012/10/restaurant.jpeg">
           </div>
 
-          <!-- <a class="item item-icon-left assertive" href="#"> -->
           <div class="item">
-            <h1>{{item.rating}}   <span><i class="customIcon icon ion-star assertive"></i></span></h1>
+            <h1>{{item.rating.toFixed(1)}}   <span><i class="customIcon icon ion-star assertive"></i></span></h1>
           </div>
       
 
@@ -48,4 +47,9 @@
 			</ion-item>
 		<!-- </ion-list> -->
 	</ion-content>
+
+			<!-- </ion-item>
+		</ion-list>
+	</ion-content> -->
+
 </ion-view>
