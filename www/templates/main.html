@@ -1,0 +1,26 @@
+<ion-view title="home">
+	
+  <ion-header-bar class="bar-balanced has-tabs-top" align-title="center">
+        <h1 class="title">Makan Mana</h1>
+
+        <a class="button button-balanced icon ion-search" href="#/search"></a>
+        
+        
+  </ion-header-bar>
+    <ion-tabs class="tabs-striped tabs-top tabs-background-balanced tabs-color-light tabs-icon-top">
+
+        <ion-tab title="Home" href="#/home/breakfast">
+          <ion-nav-view name="breakfast-tab"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="About" href="#/home/lunch">
+          <ion-nav-view name="lunch-tab"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="Contact" href="#/home/dinner">
+          <ion-nav-view name="dinner-tab"></ion-nav-view>
+        </ion-tab>
+
+    </ion-tabs>
+      
+</ion-view>

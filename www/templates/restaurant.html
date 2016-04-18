@@ -11,28 +11,70 @@
     </ion-item>
     
     <div id="map" data-tap-disabled="true"></div>
-      <ion-item>
+    <ion-item>
+      <div class="row">
+        <div class="col col-33 text-center">
+          <a class="button button-clear button-balanced tab-button tab-button-checkin">
+            <i class="ion-ios-location-outline balanced"></i>
+            <p>Check In</p>
+          </a>          
+        </div>
+        <div class="col col-33 text-center">
+          <a class="button button-clear button-balanced tab-button tab-button-checkin">
+            <i class="ion-ios-telephone-outline balanced"></i>
+            <p>Phone Call</p>
+          </a>          
+        </div>
+        <div class="col col-33 text-center">
+          <a class="button button-clear button-balanced tab-button" href="#/ratingForm/{{restaurant.id}}">          
+            <i class="ion-ios-compose-outline balanced"></i>
+            <p>Post Review</p>
+          </a>
+        </div>
+        <!-- <div class="col col-33 text-center">Call</div> -->
+        
+      </div>
+    </ion-item>
+    <ion-item>
         <p>Address: </p>
-        <h3> {{ restaurant.address }}, {{ restaurant.postalCode }} {{ restaurant.city }}, {{ restaurant.state }} </h3>
+        <h3>{{ restaurant.address }}, {{ restaurant.postalCode }} {{ restaurant.city }}, {{ restaurant.state }} </h3>
         <p>Opening Hours: </p>
         <h3> {{ restaurant.openingHours }} </h3>
         <p>Halal Status: </p>
         <h3> {{ restaurant.halalStatus }} </h3>
         <p>Distances: </p>
-        <h3> {{ distance.toFixed(3) }} </h3>
+        <h3> {{ distance.toFixed(3) }} km</h3>
+    </ion-item>
+    <ion-item>
+      <h1 class="customRating">{{restaurant.rating.toFixed(1)}}
+        <span>
+          <rating class="averageRating" ng-model="restaurant.rating" max="rating.max" readonly="readOnly"></rating>
+          <p class="totalReviewer">{{totalReviewer}} Reviews</p>
+        </span>
+      </h1>      
+    </ion-item>
+    <ion-item class="text-center">
+      <h3>REVIEW HIGHLIGHTS</h3>
     </ion-item>
     <ion-list>
-      <ion-item ng-repeat="review in reviews | limitTo:3">
-          <p><i class="icon ion-person"></i>  {{review.name}}<span class="date">13/04/2016</span></p>
-          <rating ng-model="review.rating" max="rating.max" readonly="readOnly"></rating>
+      <ion-item class="reviewItem" ng-repeat="review in reviews | limitTo:3">
+          <p><i class="icon ion-person"></i>  {{review.name}}<span class="date">{{review.review_date | date: "dd/MM/yyyy"}}</span></p>
+          <rating class="reviewStar" ng-model="review.rating" max="rating.max" readonly="readOnly"></rating>
           <br>
           <p>{{review.description}}</p>
       </ion-item>
     </ion-list>
-     <ion-item>
-        <a class="button button-clear button-balanced" href="#/reviews/{{restaurant.id}}">View All Reviews</a>
-      </ion-item>
-    <ion-item><a class="button button-balanced button-block" href="#/ratingForm/{{restaurant.id}}">Post Review</a></ion-item>
+ 
+    <a class="button button-clear button-balanced button-block" href="#/reviews/{{restaurant.id}}">VIEW ALL REVIEWS</a>
+    <!-- <ion-item>
+    <a class="button button-balanced button-block" href="#/ratingForm/{{restaurant.id}}">Post Review</a></ion-item> -->
     
   </ion-content>
+   <a class="button float-button">
+     <span class="height-fix">
+        <div class="content">
+          <i class="ion-ios-navigate balanced"> </i>
+        </div>
+      </span>
+   </a>
 </ion-view>

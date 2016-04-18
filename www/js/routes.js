@@ -10,8 +10,9 @@ angular.module('app.routes', [])
 
   $stateProvider
   .state('home', {
-    cache: false,
-    url: '/',
+    // cache: false,
+    url: '/home',
+    // abstract: true,
     templateUrl: 'templates/home.html',
     controller: 'AppCtrl'
   })
@@ -34,6 +35,41 @@ angular.module('app.routes', [])
     templateUrl: 'templates/reviews.html',
     controller: 'ReviewCtrl'
   });
-  $urlRouterProvider.otherwise('/'); 
+  // .state('');
+
+  // .state('tabs', {
+  //     url: "/tab",
+  //     abstract: true,
+  //     templateUrl: "templates/home.html"
+  //   })
+  //   .state('home.breakfast', {
+  //     url: "/breakfast",
+  //     views: {
+  //       'breakfast-tab': {
+  //         templateUrl: "templates/home.html",
+  //         controller: 'AppCtrl'
+  //       }
+  //     }
+  //   })
+  //   .state('home.lunch', {
+  //     url: "/lunch",
+  //     views: {
+  //       'lunch-tab': {
+  //         templateUrl: "templates/home.html",
+  //         controller: 'AppCtrl'
+  //       }
+  //     }
+  //   })
+  //   .state('home.dinner', {
+  //     url: "/dinner",
+  //     views: {
+  //       'dinner-tab': {
+  //         templateUrl: "templates/home.html",
+  //         controller: 'AppCtrl'
+  //       }
+  //     }
+  //   });
+  $urlRouterProvider.otherwise('/home'); 
+    
 
 });

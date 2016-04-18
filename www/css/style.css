@@ -2,14 +2,102 @@
 .item-content{
     padding:0px !important;
 }
+.reviewStar li i{
+    font-size: 16px !important;
+}
+.reviewItem{
+    border:none;
+}
+.totalReviewer{
+    margin-top: -33px;
+    padding-left: 10px;
+}
+.customRating{
+    display: -webkit-inline-box;
+    font-size: 64px !important;
+}
+.averageRating{
+    padding-top: 5px;
+    padding-left: 5px;
+}
+.averageRating li i{
+    font-size: 36px !important;
+    vertical-align: super;
+}
+.customStar{
+    text-align: center;
+    padding-bottom: 16px;
+}
+.customStar li{
+    padding-left: 10px;
+    padding-bottom: 16px;
+}
+.customStar li i{
+    font-size: 48px !important;
+}
+.tab-button{
+    color: #53C2D1;
+    margin-top: -14px;
+}
+
+.tab-button i{
+    font-size: 32px;
+}
+.tab-button-checkin i{
+    font-size: 28px !important;
+}
+.tab-button-checkin p{
+    margin-top: -19px !important;
+}
+.tab-button p{
+    color: #53C2D1;
+    margin-top: -20px;
+}
+
+.float-button { 
+    background-color: #FFFFFF;
+    /* opacity: 0.9; */
+    color: white;
+    border-radius: 50%;
+    /* border-radius: 15% 0 0 0; */
+    width: 65px;
+    height: 65px;
+    /* padding: 25px; */
+    font-size: 80px;
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    z-index: 1000;
+}
+ 
+.float-button .height_fix {
+    margin-top: 100%;
+    border: 1px solid red;
+}
+ 
+.float-button .content {
+    position: absolute;
+    left: -2%;
+    top: -5%;
+    /* right: -5%; */
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    margin-top: -5px;
+    color: white;
+}
 
 .customIcon{
     font-size: 22px !important;
+    position: absolute;
+    top: 33.33%;
+    padding-left: 5px;
 }
 
 .customCard{
     border-bottom:none;
     margin-bottom: 5px !important;
+    border: 0px;
 }
 
 .list-item{
@@ -24,7 +112,7 @@
  
 #map {
     width: 100% !important;
-    height: 50% !important;
+    height: 40% !important;
 }
 
 #map_canvas {
@@ -43,9 +131,6 @@
 }
 .formItem{
     text-align: center;
-}
-.formItem ul.rating{
-    font-size: 36px;
 }
 .date{
     display:inline;
