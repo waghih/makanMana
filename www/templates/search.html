@@ -23,65 +23,36 @@
     <ion-item class="select-item">
       <label class="item item-input item-select">
         <div class="input-label" style="display:block;">
-          State *
+          State 
         </div>
-      
-
         <!-- <div style="text-align:right"> -->
           <div style="width:100%; text-align:right; padding-right:20px;">
             <!-- <div class="button"> -->
-              <button class="button button-clear button-dark" ng-click="openModal()">{{modalData.msg}}</button>
+              <button class="button button-clear button-dark" ng-click="openStates()">{{statesData.msg}}</button>
             <!-- </div>             -->
           </div>
-
-
-        <!-- </div> -->
-        <!-- <select>
-          <option selected> </option>
-          <option>Johor</option>
-          <option>Kedah</option>
-          <option>Kelantan</option>
-          <option>Malacca</option>
-          <option>Negeri Sembilan</option>
-          <option>Pahang</option>
-          <option>Penang</option>
-          <option>Perak</option>
-          <option>Perlis</option>
-          <option>Sabah</option>
-          <option>Sarawak</option>
-          <option>Selangor</option>
-          <option>Terengganu</option>
-          <option>Kuala Lumpur</option>
-          <option>Labuan</option>
-          <option>Putrajaya</option>
-        </select> -->
       </label>
-      <label class="item item-input item-select list-item" >
-        <div class="input-label">
+
+      <label class="item item-input item-select" >
+        <div class="input-label" style="display:block;">
           City
         </div>
-        <select>
-          <option selected> </option>
-          <option>Alor Setar</option>
-          <option>George Town</option>
-          <option>Ipoh</option>
-          <option>Johor Bahru</option>
-          <option>Kota Kinabalu</option>
-          <option>Kuala Lumpur</option>
-          <option>Kuala Terengganu</option>
-          <option>Kuching</option>
-          <option>Malacca City</option>
-          <option>Miri</option>
-          <option>Penang Island</option>
-          <option>Petaling jaya</option>
-          <option>Shah Alam</option>
-        </select>
+        <div style="width:100%; text-align:right; padding-right:20px;">
+            <!-- <div class="button"> -->
+              <button class="button button-clear button-dark" ng-click="openCity()">{{cityData.msg}}</button>
+            <!-- </div>             -->
+          </div>
       </label>
       
-      <label class="item item-input item-select list-item" >
-        <div class="input-label">
-          Type of Meal *
+      <label class="item item-input item-select" >
+        <div class="input-label" style="display:block;">
+          Type of Meal
         </div>
+        <div style="width:100%; text-align:right; padding-right:20px;">
+            <!-- <div class="button"> -->
+              <button class="button button-clear button-dark" ng-click="openMeal()">{{mealData.msg}}</button>
+            <!-- </div>             -->
+          </div><!-- 
         <select>
           <option selected> </option>
           <option>Breakfast</option>
@@ -89,22 +60,22 @@
           <option>Hi-Tea</option>
           <option>Dinner</option>
           <option>Supper</option>
-        </select>
+        </select> -->
       </label>
 
-      <label class="item item-input item-select list-item" >
-        <div class="input-label">
+      <label class="item item-input item-select" >
+        <div class="input-label" style="display:block;">
           Cuisine
         </div>
-        <select>
-          <option selected> </option>
-          <option>Arabian</option>
-          <option>Chinese</option>
-          <option>Indian</option>
-          <option>Malaysian</option>
-          <option>Thailand</option>
-        </select>
+        </div>
+        <!-- <div style="text-align:right"> -->
+          <div style="width:100%; text-align:right; padding-right:20px;">
+            <!-- <div class="button"> -->
+              <button class="button button-clear button-dark" ng-click="openCuisine()">{{cuisineData.msg}}</button>
+            <!-- </div>             -->
+          </div>
       </label>
+
     </ion-item>
     <ion-item>
     </ion-item> 
@@ -120,26 +91,77 @@
       </div>
     </ion-item>
 
-    <ion-item class="select-item">
-      <label class="price-item item item-input item-stacked-label">
-        <span class="input-label">Price</span>
-        <span class="row range-item">
-          <input class="col col-50 max" type="text" placeholder="MAX">
-          <input class="col col-50" type="text" placeholder="MIN">
-        </span>  
-      </label>
-    </ion-item>
+   <ion-item>
+        
+        <div style="width:100%; text-align:right; padding-right:0px;">
+          <div class="input-label" style="display: -webkit-inline-box;float: left;padding-top: 12px;">
+          Price
+        </div>
+            <button class="button button-outline button-balanced" ng-class="{'active': isActive}" ng-click="activeButton()" type="button">$</button> 
+            <button class="button button-outline button-balanced" ng-class="{'active': isActive2}" ng-click="activeButton2()" type="button">$$</button>
+
+            <button class="button button-outline button-balanced" ng-class="{'active': isActive3}" ng-click="activeButton3()" type="button">$$$</button>
+        </div>
+  </ion-item>
 
 
   <script id="modal.html" type="text/ng-template">
     <div class="modal" ng-controller="ModalCtrl">
         <ion-header-bar class="bar bar-header bar-balanced">
-          <h1 class="title">Select Month</h1>
+          <h1 class="title">Select State</h1>
           <button class="button button-clear button-primary" ng-click="hideModal()">Cancel</button>
         </ion-header-bar>
         <ion-content>
           <div class="list">
-            <ion-item ng-model="modalData.msg" ng-repeat="item in months" ng-click="doSomething(item)">
+            <ion-item ng-model="modalData.msg" ng-repeat="item in states" ng-click="doSomething(item)">
+              {{item}}
+            </ion-item>
+          </div>
+        </ion-content>
+    </div>
+  </script>
+
+  <script id="city.html" type="text/ng-template">
+    <div class="modal" ng-controller="ModalCtrl">
+        <ion-header-bar class="bar bar-header bar-balanced">
+          <h1 class="title">Select City</h1>
+          <button class="button button-clear button-primary" ng-click="hideModal()">Cancel</button>
+        </ion-header-bar>
+        <ion-content>
+          <div class="list">
+            <ion-item ng-model="modalData.msg" ng-repeat="item in city" ng-click="doSelectCity(item)">
+              {{item}}
+            </ion-item>
+          </div>
+        </ion-content>
+    </div>
+  </script>
+
+  <script id="meal.html" type="text/ng-template">
+    <div class="modal" ng-controller="ModalCtrl">
+        <ion-header-bar class="bar bar-header bar-balanced">
+          <h1 class="title">Select Type of Meal</h1>
+          <button class="button button-clear button-primary" ng-click="hideModal()">Cancel</button>
+        </ion-header-bar>
+        <ion-content>
+          <div class="list">
+            <ion-item ng-model="modalData.msg" ng-repeat="item in meal" ng-click="doSelectMeal(item)">
+              {{item}}
+            </ion-item>
+          </div>
+        </ion-content>
+    </div>
+  </script>
+
+  <script id="cuisine.html" type="text/ng-template">
+    <div class="modal" ng-controller="ModalCtrl">
+        <ion-header-bar class="bar bar-header bar-balanced">
+          <h1 class="title">Select Type of Meal</h1>
+          <button class="button button-clear button-primary" ng-click="hideModal()">Cancel</button>
+        </ion-header-bar>
+        <ion-content>
+          <div class="list">
+            <ion-item ng-model="modalData.msg" ng-repeat="item in cuisine" ng-click="doSelectCuisine(item)">
               {{item}}
             </ion-item>
           </div>
