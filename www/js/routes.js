@@ -23,7 +23,8 @@ angular.module('app.routes', [])
   })
   .state('search', {
     url: '/search',
-    templateUrl: 'templates/search.html'
+    templateUrl: 'templates/search.html',
+    controller: 'SearchCtrl'
   })
   .state('ratingForm',{
     url:'/ratingForm/:restaurantId',

@@ -181,3 +181,9 @@ angular.module('app.controllers', [])
   $scope.showReview();
 
 })
+
+.controller('SearchCtrl',function($scope){
+  $scope.selectables = [
+    1, 2, 3
+  ];
+})

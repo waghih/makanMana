@@ -103,26 +103,26 @@
      </label>
   </li>
 
-  <label class="item list-item">
+  <label class="item item-list list-item">
     <div class="input-label">
       Price
+    </div>
+    <div class="row">
+      <label class="item item-input col col-50" name="min">
+        <input required ng-model="rating.reviewer" type="text" placeholder="Min: RM">
+    </label>
+    <label class="item item-input col col-50" name="max">
+        <input required ng-model="rating.reviewDescription" type="text" placeholder="Max: RM">
+      </label>
     </div>  
-<div class="item range range-balanced senarai">
-  0
-  <input type="range" name="volume" min="0" max="100" value="50">
-  100
-</div>
   </label>
+    
   
   <label class="item list-item">
     <div class="input-label">
       Rating
     </div>  
-<div class="item range range-balanced senarai">
-  <i class="icon ion-sad-outline"></i>
-  <input type="range" name="volume" min="0" max="10" value="5">
-  <i class="icon ion-happy-outline"></i>
-</div>
+        <rating class="customStar" ng-model="rating.rate" max="rating.max"></rating>
   </label>
 
 
