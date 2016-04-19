@@ -182,7 +182,34 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('SearchCtrl',function($scope){
-  $scope.countries = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
+.controller('SearchCtrl',function($scope, $ionicModal){
+  $scope.months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  
 
+  $ionicModal.fromTemplateUrl('modal.html', function(modal) {
+    $scope.modalCtrl = modal;
+  }, {
+    scope: $scope,
+    animation: 'slide-in-up',
+    focusFirstInput: true
+  });
+
+  $scope.modalData = {"msg" : 'Jan'};
+  
+  $scope.openModal = function() {          
+    $scope.modalCtrl.show();
+  };
 })
+
+.controller('ModalCtrl', function($scope) {
+
+  $scope.hideModal = function() {
+    $scope.modalCtrl.hide();
+  };
+  
+  $scope.doSomething = function(item) {
+    $scope.modalData.msg = item;
+    $scope.modalCtrl.hide();
+  };
+  
+});

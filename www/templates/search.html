@@ -1,4 +1,5 @@
 <ion-view title="Search">
+
   <ion-nav-bar class="bar-balanced" align-title="center">
     <ion-nav-back-button class="button-clear">
       <i class="on-ios-arrow-back"></i>
@@ -6,6 +7,7 @@
   </ion-nav-bar>
 
   <ion-content>
+
     <ion-item>
       <div class="item-toggle">
          Auto Locate
@@ -17,12 +19,20 @@
          </label>
       </div>
     </ion-item>
+
     <ion-item class="select-item">
-      <label class="item item-input item-select" >
-        <div class="input-label">
+      <label class="item item-input">
+        <div class="input-label" style="display:block;">
           State *
         </div>
-        <select>
+      
+
+        <!-- <div style="text-align:right"> -->
+          <div style="width:100%; text-align:right;">
+            <button class="icon-right ion-ios7-arrow-down button-clear button-dark" ng-click="openModal()">{{modalData.msg}}</button>
+          </div>
+        <!-- </div> -->
+        <!-- <select>
           <option selected> </option>
           <option>Johor</option>
           <option>Kedah</option>
@@ -40,7 +50,7 @@
           <option>Kuala Lumpur</option>
           <option>Labuan</option>
           <option>Putrajaya</option>
-        </select>
+        </select> -->
       </label>
       <label class="item item-input item-select list-item" >
         <div class="input-label">
@@ -105,6 +115,7 @@
          </label>
       </div>
     </ion-item>
+
     <ion-item class="select-item">
       <label class="price-item item item-input item-stacked-label">
         <span class="input-label">Price</span>
@@ -114,17 +125,31 @@
         </span>  
       </label>
     </ion-item>
+
+
+  <script id="modal.html" type="text/ng-template">
+    <div class="modal" ng-controller="ModalCtrl">
+        <ion-header-bar class="bar bar-header bar-balanced">
+          <h1 class="title">Select Month</h1>
+          <button class="button button-clear button-primary" ng-click="hideModal()">Cancel</button>
+        </ion-header-bar>
+        <ion-content>
+          <div class="list">
+            <ion-item ng-model="modalData.msg" ng-repeat="item in months" ng-click="doSomething(item)">
+              {{item}}
+            </ion-item>
+          </div>
+        </ion-content>
+    </div>
+  </script>
+
     <div class="search" align="center">
       <a class="button icon-left ion-search button-balanced" align-title="center" href="#/">Search</a>
     </div> 
+
   </ion-content>
 </ion-view>
 
 
-<script type="text/ng-template" id="customTemplate.html">
-  <a>
-      <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
-      <i>({{match.model.capital}})</i>
-  </a>
-</script>
+
 

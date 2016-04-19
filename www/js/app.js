@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-angular.module('app', ['ionic','app.routes','app.controllers','app.services','app.directives','ngCordova','ionic.rating','ui.bootstrap'])
+angular.module('app', ['ionic','app.routes','app.controllers','app.services','app.directives','ngCordova','ionic.rating'])
 
 
 // .controller('AppCtrl',function($scope, HttpService, $ionicLoading, DistanceService){
