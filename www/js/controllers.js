@@ -181,3 +181,7 @@ angular.module('app.controllers', [])
   $scope.showReview();
 
 })
+
+.controller('SearchCtrl',function($scope){
+  $scope.countries = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
+})

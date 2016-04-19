@@ -2,6 +2,9 @@
 .item-content{
     padding:0px !important;
 }
+.select-item{
+    padding: 0px;
+}
 .reviewStar li i{
     font-size: 16px !important;
 }
@@ -35,9 +38,19 @@
 .customStar li i{
     font-size: 48px !important;
 }
+.search{
+    padding: 16px;
+}
+.max{
+    border-right: 1px solid #ddd !important;
+    margin-right: 21px !important;
+}
 .tab-button{
     color: #53C2D1;
     margin-top: -14px;
+}
+.price-item, .range-item{
+    padding-bottom: 0px;
 }
 
 .tab-button i{
@@ -102,7 +115,7 @@
 }
 
 .list-item{
-	border-bottom:2px solid #ddd;
+	padding: none;
 }
 .senarai{
 	border:none;
