@@ -1,137 +1,130 @@
 <ion-view title="Search">
-	<ion-nav-bar class="bar-balanced" align-title="center">
-		<ion-nav-back-button class="button-clear">
-			<i class="on-ios-arrow-back"></i>
-		</ion-nav-back-button>
-	</ion-nav-bar>
-	<ion-content>
-      <div class="list">
+  <ion-nav-bar class="bar-balanced" align-title="center">
+    <ion-nav-back-button class="button-clear">
+      <i class="on-ios-arrow-back"></i>
+    </ion-nav-back-button>
+  </ion-nav-bar>
 
-    
-    <li class="item item-toggle list-item">
-     Auto Locate
-     <label class="toggle toggle-balanced">
-       <input type="checkbox">
-       <div class="track">
-         <div class="handle"></div>
-       </div>
-     </label>
-  </li>
-
-  <label class="item item-input item-select list-item" >
-    <div class="input-label">
-      State *
-    </div>
-    <select>
-      <option selected> </option>
-      <option>Johor</option>
-      <option>Kedah</option>
-      <option>Kelantan</option>
-      <option>Malacca</option>
-      <option>Negeri Sembilan</option>
-      <option>Pahang</option>
-      <option>Penang</option>
-      <option>Perak</option>
-      <option>Perlis</option>
-      <option>Sabah</option>
-      <option>Sarawak</option>
-      <option>Selangor</option>
-      <option>Terengganu</option>
-      <option>Kuala Lumpur</option>
-      <option>Labuan</option>
-      <option>Putrajaya</option>
-    </select>
-  </label>
-
-  <label class="item item-input item-select list-item" >
-    <div class="input-label">
-      City
-    </div>
-    <select>
-      <option selected> </option>
-      <option>Alor Setar</option>
-      <option>George Town</option>
-      <option>Ipoh</option>
-      <option>Johor Bahru</option>
-      <option>Kota Kinabalu</option>
-      <option>Kuala Lumpur</option>
-      <option>Kuala Terengganu</option>
-      <option>Kuching</option>
-      <option>Malacca City</option>
-      <option>Miri</option>
-      <option>Penang Island</option>
-      <option>Petaling jaya</option>
-      <option>Shah Alam</option>
-    </select>
-  </label>
-
-  <label class="item item-input item-select list-item" >
-    <div class="input-label">
-      Type of Meal *
-    </div>
-    <select>
-      <option selected> </option>
-      <option>Breakfast</option>
-      <option>Lunch</option>
-      <option>Hi-Tea</option>
-      <option>Dinner</option>
-      <option>Supper</option>
-    </select>
-  </label>
-
-  <label class="item item-input item-select list-item" >
-    <div class="input-label">
-      Cuisine
-    </div>
-    <select>
-      <option selected> </option>
-      <option>Arabian</option>
-      <option>Chinese</option>
-      <option>Indian</option>
-      <option>Malaysian</option>
-      <option>Thailand</option>
-    </select>
-  </label>
-
-  <li class="item item-toggle list-item">
-     Halal
-     <label class="toggle toggle-balanced">
-       <input type="checkbox">
-       <div class="track">
-         <div class="handle"></div>
-       </div>
-     </label>
-  </li>
-
-  <label class="item item-list list-item">
-    <div class="input-label">
-      Price
-    </div>
-    <div class="row">
-      <label class="item item-input col col-50" name="min">
-        <input required ng-model="rating.reviewer" type="text" placeholder="Min: RM">
-    </label>
-    <label class="item item-input col col-50" name="max">
-        <input required ng-model="rating.reviewDescription" type="text" placeholder="Max: RM">
+  <ion-content>
+    <ion-item>
+      <div class="item-toggle">
+         Auto Locate
+         <label class="toggle toggle-balanced">
+           <input type="checkbox">
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label>
+      </div>
+    </ion-item>
+    <ion-item class="select-item">
+      <label class="item item-input item-select" >
+        <div class="input-label">
+          State *
+        </div>
+        <select>
+          <option selected> </option>
+          <option>Johor</option>
+          <option>Kedah</option>
+          <option>Kelantan</option>
+          <option>Malacca</option>
+          <option>Negeri Sembilan</option>
+          <option>Pahang</option>
+          <option>Penang</option>
+          <option>Perak</option>
+          <option>Perlis</option>
+          <option>Sabah</option>
+          <option>Sarawak</option>
+          <option>Selangor</option>
+          <option>Terengganu</option>
+          <option>Kuala Lumpur</option>
+          <option>Labuan</option>
+          <option>Putrajaya</option>
+        </select>
       </label>
-    </div>  
-  </label>
-    
-  
-  <label class="item list-item">
-    <div class="input-label">
-      Rating
-    </div>  
-        <rating class="customStar" ng-model="rating.rate" max="rating.max"></rating>
-  </label>
+      <label class="item item-input item-select list-item" >
+        <div class="input-label">
+          City
+        </div>
+        <select>
+          <option selected> </option>
+          <option>Alor Setar</option>
+          <option>George Town</option>
+          <option>Ipoh</option>
+          <option>Johor Bahru</option>
+          <option>Kota Kinabalu</option>
+          <option>Kuala Lumpur</option>
+          <option>Kuala Terengganu</option>
+          <option>Kuching</option>
+          <option>Malacca City</option>
+          <option>Miri</option>
+          <option>Penang Island</option>
+          <option>Petaling jaya</option>
+          <option>Shah Alam</option>
+        </select>
+      </label>
+      
+      <label class="item item-input item-select list-item" >
+        <div class="input-label">
+          Type of Meal *
+        </div>
+        <select>
+          <option selected> </option>
+          <option>Breakfast</option>
+          <option>Lunch</option>
+          <option>Hi-Tea</option>
+          <option>Dinner</option>
+          <option>Supper</option>
+        </select>
+      </label>
 
-
-</div>
-
-<div class="search" align="center">
-<a class="button icon-left ion-search button-balanced" align-title="center" href="#/">Search</a>
-</div>
-
-
-      </ion-content>
+      <label class="item item-input item-select list-item" >
+        <div class="input-label">
+          Cuisine
+        </div>
+        <select>
+          <option selected> </option>
+          <option>Arabian</option>
+          <option>Chinese</option>
+          <option>Indian</option>
+          <option>Malaysian</option>
+          <option>Thailand</option>
+        </select>
+      </label>
+    </ion-item>
+    <ion-item>
+    </ion-item> 
+    <ion-item>
+      <div class="item-toggle">
+         Halal
+         <label class="toggle toggle-balanced">
+           <input type="checkbox">
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label>
+      </div>
+    </ion-item>
+    <ion-item class="select-item">
+      <label class="price-item item item-input item-stacked-label">
+        <span class="input-label">Price</span>
+        <span class="row range-item">
+          <input class="col col-50 max" type="text" placeholder="MAX">
+          <input class="col col-50" type="text" placeholder="MIN">
+        </span>  
+      </label>
+    </ion-item>
+    <div class="search" align="center">
+      <a class="button icon-left ion-search button-balanced" align-title="center" href="#/">Search</a>
+    </div> 
+  </ion-content>
 </ion-view>
+
+
+<script type="text/ng-template" id="customTemplate.html">
+  <a>
+      <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+      <i>({{match.model.capital}})</i>
+  </a>
+</script>
+
