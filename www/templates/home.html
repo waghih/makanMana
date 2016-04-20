@@ -3,13 +3,13 @@
 
       <div class="tabs-striped tabs-top tabs-background-balanced tabs-color-light">
           <div class="tabs">
-            <a class="tab-item" href="#/home/breakfast">
+            <a class="tab-item" ng-class="{'tab-item': !breakfastActive, 'tab-item active': breakfastActive}" ng-click="breakfastTab()" href="#/">
               Breakfast
             </a>
-            <a class="tab-item" href="#/home/lunch">
+            <a class="tab-item" ng-class="{'tab-item': !lunchActive, 'tab-item active': lunchActive}" ng-click="lunchTab()" href="#/">
               Lunch
             </a>
-            <a class="tab-item" href="#/home/dinner">
+            <a class="tab-item" ng-class="{'tab-item': !dinnerActive, 'tab-item active': dinnerActive}" ng-click="dinnerTab()" href="#/">
               Dinner
             </a>
           </div>

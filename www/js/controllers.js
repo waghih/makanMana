@@ -1,6 +1,52 @@
 angular.module('app.controllers', [])
   
 .controller('AppCtrl',function($scope, HttpService, $ionicLoading, DistanceService, $ionicSideMenuDelegate){
+  var myDate = new Date();
+  var hrs = myDate.getHours();
+
+  $scope.breakfastActive = false;
+  $scope.lunchActive = false;
+  $scope.dinnerActive = false;
+
+  
+
+    if (hrs < 12){
+      $scope.breakfastActive = !$scope.breakfastActive;
+      $scope.lunchActive = false;
+      $scope.dinnerActive = false;
+    }        
+    else if (hrs >= 12 && hrs <= 18){
+      $scope.lunchActive = !$scope.lunchActive;
+      $scope.breakfastActive = false;
+      $scope.dinnerActive = false;
+    }
+    else if (hrs >= 18 && hrs <= 24){
+      $scope.dinnerActive = !$scope.dinnerActive;
+      $scope.breakfastActive = false;
+      $scope.lunchActive = false;
+    }
+        
+
+  
+
+  $scope.breakfastTab = function(){
+    $scope.breakfastActive = !$scope.breakfastActive;
+    $scope.lunchActive = false;
+    $scope.dinnerActive = false;
+  }
+  $scope.lunchTab = function(){
+    $scope.lunchActive = !$scope.lunchActive;
+    $scope.breakfastActive = false;
+    $scope.dinnerActive = false;
+  }
+  $scope.dinnerTab = function(){
+    $scope.dinnerActive = !$scope.dinnerActive;
+    $scope.breakfastActive = false;
+    $scope.lunchActive = false;
+  }
+
+
+>>>>>>> f10bcd569865854b04af908f2efdfa38ab6b97b7
   $scope.items = [];
 
   $ionicLoading.show({
