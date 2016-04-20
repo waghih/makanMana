@@ -1,11 +1,15 @@
 angular.module('app.controllers', [])
   
-.controller('AppCtrl',function($scope, HttpService, $ionicLoading, DistanceService){
+.controller('AppCtrl',function($scope, HttpService, $ionicLoading, DistanceService, $ionicSideMenuDelegate){
   $scope.items = [];
 
   $ionicLoading.show({
     template: 'Loading...'
   });
+
+  $scope.toggleLeft = function() {
+    $ionicSideMenuDelegate.toggleLeft();
+  };
 
   DistanceService.getLocation(function() {
     HttpService.getRestaurants().then(function(response) {

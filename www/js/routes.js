@@ -9,32 +9,67 @@ angular.module('app.routes', [])
   "use strict";
 
   $stateProvider
-  .state('home', {
+  .state('menu.home', {
     // cache: false,
     url: '/home',
+    views:{
+      'side-menu21':{
+        templateUrl: 'templates/home.html', 
+        controller: 'AppCtrl'
+      }
+    }
     // abstract: true,
-    templateUrl: 'templates/home.html',
-    controller: 'AppCtrl'
   })
-  .state('restaurant',{
+  .state('menu.restaurant',{
     url:'/restaurant/:restaurantId',
-    templateUrl: 'templates/restaurant.html',
-    controller: 'RestaurantCtrl'
+    views:{
+      'side-menu21':{
+      templateUrl: 'templates/restaurant.html',
+      controller: 'RestaurantCtrl'
+      }
+    } 
   })
-  .state('search', {
+  .state('menu.search', {
     url: '/search',
-    templateUrl: 'templates/search.html',
-    controller: 'SearchCtrl'
+    views:{
+      'side-menu21':{ 
+      templateUrl: 'templates/search.html',
+      controller: 'SearchCtrl'
+      }
+    }
   })
-  .state('ratingForm',{
+  .state('menu.ratingForm',{
     url:'/ratingForm/:restaurantId',
-    templateUrl: 'templates/ratingForm.html',
-    controller: 'RatingCtrl'
+    views:{
+      'side-menu21':{
+      templateUrl: 'templates/ratingForm.html',
+      controller: 'RatingCtrl'
+      }
+    }
   })
-  .state('reviews',{
+  .state('menu.reviews',{
     url:'/reviews/:restaurantId',
-    templateUrl: 'templates/reviews.html',
-    controller: 'ReviewCtrl'
+    views:{
+      'side-menu21':{
+      templateUrl: 'templates/reviews.html',
+      controller: 'ReviewCtrl'
+      }
+    }
+    
+  })
+  .state('menu.about',{
+    url:'/about',
+    views:{
+      'side-menu21':{
+      templateUrl: 'templates/about.html'
+      }
+    }
+    
+  })
+  .state('menu', {
+    url: '/side-menu21',
+    templateUrl: 'templates/menu.html',
+    abstract:true
   });
   // .state('');
 
@@ -70,7 +105,7 @@ angular.module('app.routes', [])
   //       }
   //     }
   //   });
-  $urlRouterProvider.otherwise('/home'); 
+  $urlRouterProvider.otherwise('/side-menu21/home'); 
     
 
 });

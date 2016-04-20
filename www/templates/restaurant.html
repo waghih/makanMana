@@ -1,4 +1,5 @@
-<ion-view title="Restaurant">
+<ion-view title="">
+
 	<ion-nav-bar class="bar-balanced" align-title="center">
     <ion-nav-back-button class="button-clear">
       <i class="on-ios-arrow-back"></i>
@@ -26,7 +27,7 @@
           </a>          
         </div>
         <div class="col col-33 text-center">
-          <a class="button button-clear button-balanced tab-button" href="#/ratingForm/{{restaurant.id}}">          
+          <a class="button button-clear button-balanced tab-button" ui-sref="menu.ratingForm({restaurantId:restaurant.id})">          
             <i class="ion-ios-compose-outline balanced"></i>
             <p>Post Review</p>
           </a>
@@ -65,7 +66,7 @@
       </ion-item>
     </ion-list>
  
-    <a class="button button-clear button-balanced button-block" href="#/reviews/{{restaurant.id}}">VIEW ALL REVIEWS</a>
+    <a class="button button-clear button-balanced button-block"  ui-sref="menu.reviews({restaurantId:restaurant.id})">VIEW ALL REVIEWS</a>
     <!-- <ion-item>
     <a class="button button-balanced button-block" href="#/ratingForm/{{restaurant.id}}">Post Review</a></ion-item> -->
     
