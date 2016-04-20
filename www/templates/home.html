@@ -1,11 +1,5 @@
-<ion-view title="home">
-	<ion-header-bar class="bar-balanced has-tabs-top" align-title="center">
-        <h1 class="title">Makan Mana</h1>
-
-        <a class="button button-balanced icon ion-search" href="#/search"></a>
-        
-        
-  </ion-header-bar>
+<ion-view title="">
+	
 
       <div class="tabs-striped tabs-top tabs-background-balanced tabs-color-light">
           <div class="tabs">
@@ -22,7 +16,7 @@
         </div>
 
 	<ion-content class="has-subheader">
-			<ion-item class="customCard" ng-repeat="item in items | orderBy:'distance':reverse" href="#/restaurant/{{item.id}}">
+			<ion-item class="customCard" ng-repeat="item in items | orderBy:'distance':reverse" ui-sref="menu.restaurant({restaurantId:item.id})">
         <div class="list card customCard">
 
           <div class="item">
