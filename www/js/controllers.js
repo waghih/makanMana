@@ -15,7 +15,7 @@ angular.module('app.controllers', [])
       $scope.lunchActive = false;
       $scope.dinnerActive = false;
     }        
-    else if (hrs >= 12 && hrs <= 18){
+    else if (hrs >= 12 && hrs < 18){
       $scope.lunchActive = !$scope.lunchActive;
       $scope.breakfastActive = false;
       $scope.dinnerActive = false;
