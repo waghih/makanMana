@@ -204,8 +204,10 @@ angular.module('app.controllers', [])
 })
 
 .controller('SearchCtrl',function($scope, $ionicModal){
-  $scope.months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  
+  $scope.states = ['Johor','Kedah','Kelantan','Malacca','Negeri Sembilan','Pahang','Penang','Perak','Perlis','Sabah','Sarawak','Selangor','Kuala Lumpur','Labuan','Putrajaya'];
+  $scope.city = ['a','b','c'];
+  $scope.meal = ['Breakfast','Lunch','Dinner'];
+  $scope.cuisine = ['Arabian','Chinese','Indian','Indonesian','Malaysian','Thailand'];
 
   $ionicModal.fromTemplateUrl('modal.html', function(modal) {
     $scope.modalCtrl = modal;
@@ -215,22 +217,104 @@ angular.module('app.controllers', [])
     focusFirstInput: true
   });
 
-  $scope.modalData = {"msg" : 'Jan'};
+  $ionicModal.fromTemplateUrl('city.html', function(modal) {
+    $scope.modalcityCtrl = modal;
+  }, {
+    scope: $scope,
+    animation: 'slide-in-up',
+    focusFirstInput: true
+  });
+
+  $ionicModal.fromTemplateUrl('meal.html', function(modal) {
+    $scope.modalmealCtrl = modal;
+  }, {
+    scope: $scope,
+    animation: 'slide-in-up',
+    focusFirstInput: true
+  });
+
+  $ionicModal.fromTemplateUrl('cuisine.html', function(modal) {
+    $scope.modalcuisineCtrl = modal;
+  }, {
+    scope: $scope,
+    animation: 'slide-in-up',
+    focusFirstInput: true
+  });
+
+  $scope.statesData = {"msg" : 'Any'};
+  $scope.cityData = {"msg" : 'Any'};
+  $scope.mealData = {"msg" : 'Any'};
+  $scope.cuisineData = {"msg" : 'Any'};
+
+
   
-  $scope.openModal = function() {          
+  $scope.openStates = function() {          
     $scope.modalCtrl.show();
   };
+
+   $scope.openCity = function() {          
+    $scope.modalcityCtrl.show();
+  };
+
+   $scope.openMeal = function() {          
+    $scope.modalmealCtrl.show();
+  };
+
+   $scope.openCuisine = function() {          
+    $scope.modalcuisineCtrl.show();
+  };
+
+  $scope.isActive = false;
+  $scope.isActive2 = false;
+  $scope.isActive3 = false;
+  
+  $scope.activeButton = function() {
+    $scope.isActive = !$scope.isActive;
+  }  
+  
+  $scope.activeButton2 = function(){
+    $scope.isActive2 = !$scope.isActive2;
+  }
+
+  $scope.activeButton3 = function(){
+    $scope.isActive3 = !$scope.isActive3;
+  }
+  // $scope.activeButton3 = function(){
+  //   $scope.isActive3 = !$scope.isActive3;
+  // }
 })
 
 .controller('ModalCtrl', function($scope) {
 
   $scope.hideModal = function() {
     $scope.modalCtrl.hide();
+    $scope.modalcityCtrl.hide();
+    $scope.modalmealCtrl.hide();
+    $scope.modalcuisineCtrl.hide();
   };
   
   $scope.doSomething = function(item) {
-    $scope.modalData.msg = item;
+    $scope.statesData.msg = item;
     $scope.modalCtrl.hide();
   };
+
+  $scope.doSelectCity = function(item) {
+    $scope.cityData.msg = item;
+    $scope.modalcityCtrl.hide();
+  };
+
+  $scope.doSelectMeal = function(item) {
+    $scope.mealData.msg = item;
+    $scope.modalmealCtrl.hide();
+  };
+
+  $scope.doSelectCuisine = function(item) {
+    $scope.cuisineData.msg = item;
+    $scope.modalcuisineCtrl.hide();
+  };
+
+
+})
+
   
-});
+;
