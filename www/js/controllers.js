@@ -1,6 +1,27 @@
 angular.module('app.controllers', [])
   
 .controller('AppCtrl',function($scope, HttpService, $ionicLoading, DistanceService){
+  $scope.breakfastActive = false;
+  $scope.lunchActive = false;
+  $scope.dinnerActive = false;
+
+  $scope.breakfastTab = function(){
+    $scope.breakfastActive = !$scope.breakfastActive;
+    $scope.lunchActive = false;
+    $scope.dinnerActive = false;
+    console.log('clicked');
+    console.log($scope.breakfastActive);
+  }
+  $scope.lunchTab = function(){
+    $scope.lunchActive = !$scope.lunchActive;
+    $scope.breakfastActive = false;
+    $scope.dinnerActive = false;
+  }
+  $scope.dinnerTab = function(){
+    $scope.dinnerActive = !$scope.dinnerActive;
+    $scope.breakfastActive = false;
+    $scope.lunchActive = false;
+  }
   $scope.items = [];
 
   $ionicLoading.show({
