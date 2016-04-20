@@ -149,10 +149,8 @@
     display:inline;
     float:right;
 }
-.active {
-  background: #33cd5f;
-}
-.disabled {
-  background: #eee;
-  color: #aaa;
+.modal-select{
+    width:100%; 
+    text-align:right; 
+    padding-right:25px;
 }
