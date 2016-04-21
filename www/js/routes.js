@@ -13,7 +13,7 @@ angular.module('app.routes', [])
     // cache: false,
     url: '/home',
     views:{
-      'side-menu21':{
+      'side-menu':{
         templateUrl: 'templates/home.html', 
         controller: 'AppCtrl'
       }
@@ -23,7 +23,7 @@ angular.module('app.routes', [])
   .state('menu.restaurant',{
     url:'/restaurant/:restaurantId',
     views:{
-      'side-menu21':{
+      'side-menu':{
       templateUrl: 'templates/restaurant.html',
       controller: 'RestaurantCtrl'
       }
@@ -32,7 +32,7 @@ angular.module('app.routes', [])
   .state('menu.search', {
     url: '/search',
     views:{
-      'side-menu21':{ 
+      'side-menu':{ 
       templateUrl: 'templates/search.html',
       controller: 'SearchCtrl'
       }
@@ -41,7 +41,7 @@ angular.module('app.routes', [])
   .state('menu.ratingForm',{
     url:'/ratingForm/:restaurantId',
     views:{
-      'side-menu21':{
+      'side-menu':{
       templateUrl: 'templates/ratingForm.html',
       controller: 'RatingCtrl'
       }
@@ -50,26 +50,39 @@ angular.module('app.routes', [])
   .state('menu.reviews',{
     url:'/reviews/:restaurantId',
     views:{
-      'side-menu21':{
+      'side-menu':{
       templateUrl: 'templates/reviews.html',
       controller: 'ReviewCtrl'
       }
     }
     
   })
-  .state('menu.about',{
+  .state('menu2.about',{
     url:'/about',
     views:{
-      'side-menu21':{
+      'side-menu2':{
       templateUrl: 'templates/about.html'
       }
     }
     
   })
   .state('menu', {
-    url: '/side-menu21',
+    url: '/side-menu',
     templateUrl: 'templates/menu.html',
     abstract:true
+  })
+  .state('menu2',{
+    url:'/side-menu2',
+    templateUrl: 'templates/menu2.html',
+    abstract:true
+  })
+  .state('menu2.contact',{
+    url:'/contact',
+    views:{
+      'side-menu2':{
+        templateUrl: 'templates/feedback.html'
+      }
+    }
   });
   // .state('');
 
@@ -105,7 +118,7 @@ angular.module('app.routes', [])
   //       }
   //     }
   //   });
-  $urlRouterProvider.otherwise('/side-menu21/home'); 
+  $urlRouterProvider.otherwise('/side-menu/home'); 
     
 
 });

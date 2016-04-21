@@ -235,6 +235,7 @@ angular.module('app.controllers', [])
   $scope.city = ['a','b','c'];
   $scope.meal = ['Breakfast','Lunch','Dinner'];
   $scope.cuisine = ['Arabian','Chinese','Indian','Indonesian','Malaysian','Thailand'];
+  $scope.names = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
 
   $ionicModal.fromTemplateUrl('modal.html', function(modal) {
     $scope.modalCtrl = modal;
