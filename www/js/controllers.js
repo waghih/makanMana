@@ -15,7 +15,7 @@ angular.module('app.controllers', [])
       $scope.lunchActive = false;
       $scope.dinnerActive = false;
     }        
-    else if (hrs >= 12 && hrs <= 18){
+    else if (hrs >= 12 && hrs < 18){
       $scope.lunchActive = !$scope.lunchActive;
       $scope.breakfastActive = false;
       $scope.dinnerActive = false;
@@ -45,8 +45,6 @@ angular.module('app.controllers', [])
     $scope.lunchActive = false;
   }
 
-
->>>>>>> f10bcd569865854b04af908f2efdfa38ab6b97b7
   $scope.items = [];
 
   $ionicLoading.show({
@@ -237,6 +235,7 @@ angular.module('app.controllers', [])
   $scope.city = ['a','b','c'];
   $scope.meal = ['Breakfast','Lunch','Dinner'];
   $scope.cuisine = ['Arabian','Chinese','Indian','Indonesian','Malaysian','Thailand'];
+  $scope.names = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
 
   $ionicModal.fromTemplateUrl('modal.html', function(modal) {
     $scope.modalCtrl = modal;

@@ -1,19 +1,18 @@
-<ion-view title="">
-	
+<ion-view title="GoEat">	
 
-      <div class="tabs-striped tabs-top tabs-background-balanced tabs-color-light">
-          <div class="tabs">
-            <a class="tab-item" ng-class="{'tab-item': !breakfastActive, 'tab-item active': breakfastActive}" ng-click="breakfastTab()" href="#/">
-              Breakfast
-            </a>
-            <a class="tab-item" ng-class="{'tab-item': !lunchActive, 'tab-item active': lunchActive}" ng-click="lunchTab()" href="#/">
-              Lunch
-            </a>
-            <a class="tab-item" ng-class="{'tab-item': !dinnerActive, 'tab-item active': dinnerActive}" ng-click="dinnerTab()" href="#/">
-              Dinner
-            </a>
-          </div>
-        </div>
+    <div class="tabs-striped tabs-top tabs-background-balanced tabs-color-light">
+      <div class="tabs">
+        <a class="tab-item" ng-class="{'tab-item': !breakfastActive, 'tab-item active': breakfastActive}" ng-click="breakfastTab()" href="#/">
+          Breakfast
+        </a>
+        <a class="tab-item" ng-class="{'tab-item': !lunchActive, 'tab-item active': lunchActive}" ng-click="lunchTab()" href="#/">
+          Lunch
+        </a>
+        <a class="tab-item" ng-class="{'tab-item': !dinnerActive, 'tab-item active': dinnerActive}" ng-click="dinnerTab()" href="#/">
+          Dinner
+        </a>
+      </div>
+    </div>
 
 	<ion-content class="has-subheader">
 			<ion-item class="customCard" ng-repeat="item in items | orderBy:'distance':reverse" ui-sref="menu.restaurant({restaurantId:item.id})">
