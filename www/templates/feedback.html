@@ -1,2 +1,33 @@
 <ion-view title="Feedback">
+	<!-- <ion-nav-bar class="bar-balanced" align-title="center">
+	    <ion-nav-back-button class="button-clear">
+	      <i class="on-ios-arrow-back"></i>
+	    </ion-nav-back-button>
+	  </ion-nav-bar> -->
+
+	  <ion-content>
+	    <ion-item>
+	    <div style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);">
+            <!-- <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i> -->
+            <img class="image" src="/img/logo-goeat.jpg"></img>
+        </div>
+	    <rating class="customStar" ng-model="rating.rate" max="rating.max"></rating>
+	    
+	    <form class="list" name="feedback">
+	      <label class="item item-input item-floating-label" name="name">
+	          <span class="input-label">Name:</span>
+	          <input type="text" placeholder="Name:">
+	      </label>
+	      <label class="item item-input item-floating-label" name="email">
+	          <span class="input-label">Email:</span>
+	          <input type="text" placeholder="Email:">
+	      </label> 
+	      <label class="item item-input item-floating-label" name="message">
+	          <span class="input-label">Message:</span>
+		    <textarea placeholder="Message:"></textarea>
+		  </label>    
+	    </form>
+	    <a ng-click="emailContactDetails()" id="sendFeedback" class="button button-balanced  button-block">Send!</a>
+	    </ion-item>
+	  </ion-content>
 </ion-view>
