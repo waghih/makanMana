@@ -341,5 +341,10 @@ angular.module('app.controllers', [])
     $scope.modalcuisineCtrl.hide();
   };
 
+  // $scope.emailContactDetails = function(){
+  //     var link = "mailto:?subject=Contact Detail&body="+
+  //                    "Name: " + $scope.contact.name + "Comment: " + $scope.contact.comment;     
+  //     window.location.href = link;
+  //  };
 
 });
