@@ -6,64 +6,73 @@ angular.module('app.controllers', [])
 
   $scope.breakfastActive = false;
   $scope.lunchActive = false;
-  $scope.dinnerActive = false;
-
+  $scope.dinnerActive = false; 
+  $scope.items = [];  
   
-
-    if (hrs < 12){
-      $scope.breakfastActive = !$scope.breakfastActive;
-      $scope.lunchActive = false;
-      $scope.dinnerActive = false;
-    }        
-    else if (hrs >= 12 && hrs < 18){
-      $scope.lunchActive = !$scope.lunchActive;
-      $scope.breakfastActive = false;
-      $scope.dinnerActive = false;
-    }
-    else if (hrs >= 18 && hrs <= 24){
-      $scope.dinnerActive = !$scope.dinnerActive;
-      $scope.breakfastActive = false;
-      $scope.lunchActive = false;
-    }
-        
-
-  
-
   $scope.breakfastTab = function(){
-    $scope.breakfastActive = !$scope.breakfastActive;
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+    getRestaurantByTime(1);
+    $scope.breakfastActive = true;
     $scope.lunchActive = false;
     $scope.dinnerActive = false;
   }
   $scope.lunchTab = function(){
-    $scope.lunchActive = !$scope.lunchActive;
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+    getRestaurantByTime(2);
+    $scope.lunchActive = true;
     $scope.breakfastActive = false;
     $scope.dinnerActive = false;
   }
   $scope.dinnerTab = function(){
-    $scope.dinnerActive = !$scope.dinnerActive;
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+    getRestaurantByTime(3);    
+    $scope.dinnerActive = true;
     $scope.breakfastActive = false;
     $scope.lunchActive = false;
   }
-
-  $scope.items = [];
-
-  $ionicLoading.show({
-    template: 'Loading...'
-  });
 
   $scope.toggleLeft = function() {
     $ionicSideMenuDelegate.toggleLeft();
   };
 
-  DistanceService.getLocation(function() {
-    HttpService.getRestaurants().then(function(response) {
-        $scope.items = response.data.restaurant_info;
-        console.log(response.data.restaurant_info);
-        kiraDistance();
-        $ionicLoading.hide();
-        console.log($scope.items);
-    });
-  })
+  var getRestaurantByTime = function(time){
+    DistanceService.getLocation(function() {
+      HttpService.getRestaurantsByMeal(time).then(function(response) {
+          $scope.items = response.data.result;
+          console.log(response.data.result);
+          kiraDistance();
+          setTimeout(function() {
+            $ionicLoading.hide();
+          }, 500);
+          console.log($scope.items);
+      });
+    })
+  }
+
+  if (hrs < 12){
+    getRestaurantByTime(1);
+    $scope.breakfastActive = !$scope.breakfastActive;
+    $scope.lunchActive = false;
+    $scope.dinnerActive = false;
+  }        
+  else if (hrs >= 12 && hrs < 18){
+    getRestaurantByTime(2);
+    $scope.lunchActive = !$scope.lunchActive;
+    $scope.breakfastActive = false;
+    $scope.dinnerActive = false;
+  }
+  else if (hrs >= 18 && hrs <= 24){
+    getRestaurantByTime(3);
+    $scope.dinnerActive = !$scope.dinnerActive;
+    $scope.breakfastActive = false;
+    $scope.lunchActive = false;
+  }  
   
   var kiraDistance = function() {
     for(var i=0; i<$scope.items.length; i++ ){
@@ -106,6 +115,7 @@ angular.module('app.controllers', [])
   
   $scope.restaurantId = $stateParams.restaurantId;
   $scope.restaurant = HttpService.getRestaurant($scope.restaurantId);
+  console.log($scope.restaurant);
   $scope.showReview = function(){
     HttpService.getRestaurantReview($scope.restaurantId).then(function(response){
       $scope.reviews = response.data.result;
@@ -120,7 +130,7 @@ angular.module('app.controllers', [])
    
   console.log($scope.restaurantId);
 
-  $scope.totalReviewer = 
+  // $scope.totalReviewer = 
 
   $scope.distance = DistanceService.calculateSingleDistance($scope.restaurant.latitude,$scope.restaurant.longitude);
  
@@ -230,12 +240,38 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('SearchCtrl',function($scope, $ionicModal){
-  $scope.states = ['Johor','Kedah','Kelantan','Malacca','Negeri Sembilan','Pahang','Penang','Perak','Perlis','Sabah','Sarawak','Selangor','Kuala Lumpur','Labuan','Putrajaya'];
-  $scope.city = ['a','b','c'];
+.controller('SearchCtrl',function($scope, $ionicModal, HttpService){
+  // $scope.states = ['Johor','Kedah','Kelantan','Malacca','Negeri Sembilan','Pahang','Penang','Perak','Perlis','Sabah','Sarawak','Selangor','Kuala Lumpur','Labuan','Putrajaya'];
+  // $scope.city = ['a','b','c'];
+  $scope.districts = {
+    'Any':[],
+    'Johor':[ 'Batu Pahat', 'Johor Bahru', 'Kluang', 'Kota Tinggi', 'Kulai', 'Mersing', 'Muar', 'Pontian Kechil', 'Segamat', 'Tangkak'],
+    'Kedah':[ 'Baling', 'Serdang', 'Alor Setar', 'Sungai Petani', 'Jitra', 'Kulim', 'Kuah', 'Kuala Nerang', 'Pendang', 'Pokok Sena', 'Sik', 'Yan'],
+    'Kelantan':[ 'Bachok', 'Gua Musang', 'Jeli', 'Kota Bharu', 'Kuala Krai', 'Machang', 'Pasir Mas', 'Pasir Puteh', 'Tanah Merah', 'Tumpat'],
+    'Malacca':[ 'Alor Gajah', 'Malacca City', 'Jasin'],
+    'Negeri Sembilan':[ 'Kuala Klawang', 'Bandar Seri Jempol', 'Kuala Pilah', 'Port Dickson', 'Rembau', 'Seremban', 'Tampin'],
+    'Pahang':[ 'Bentong', 'Bandar Bera', 'Tanah Rata', 'Jerantut', 'Kuantan', 'Kuala Lipis', 'Maran', 'Pekan', 'Raub', 'Kuala Rompin', 'Temerloh'],
+    'Penang':['Bukit Mertajam', 'Kepala Batas', 'George Town', 'Sungai Jawi', 'Balik Pulau'],
+    'Perak':[ 'Tapah', 'Teluk Intan', 'Gerik', 'Kampar', 'Parit Buntar', 'Batu Gajah', 'Kuala KangsarLarut, Matang ', 'Taiping', 'Seri Manjung', 'Tanjung Malim', 'Seri Iskandar'],
+    'Sabah':[ 'Beaufort', 'Beluran', 'Keningau', 'Kota Kinabatangan', 'Kota Belud', 'Kota Kinabalu', 'Kota Marudu', 'Kuala Penyu', 'Kudat', 'Kunak', 'Lahad Datu', 'Nabawan', 'Papar', 'Donggongon', 'Pitas', 'Ranau', 'Sandakan', 'Semporna', 'Sipitang', 'Tambunan', 'Tawau', 'Tenom', 'Tongod', 'Tuaran'],
+    'Sarawak':[ 'Asajaya', 'Bau', 'Belaga', 'Betong', 'Bintulu', 'Dalat', 'Matu', 'Julau', 'Kanowit', 'Kapit', 'Kuching', 'Lawas', 'Limbang', 'Lubok Antu', 'Lundu', 'Marudi', 'Matu', 'Bintangor', 'Miri', 'Mukah', 'Pakan', 'Kota Samarahan', 'Saratok', 'Sarikei', 'Selangau', 'Serian', 'Sibu', 'Simunjan', 'Song', 'Sri Aman', 'Tatau', 'Tebedu'],
+    'Selangor':[ 'Bandar Baru Selayang', 'Bandar Baru Bangi', 'Kuala Kubu Bharu', 'Klang', 'Teluk Datok', 'Kuala Selangor', 'Subang Jaya', 'Sabak', 'Salak Tinggi'],
+    'Terengganu':[ 'Kampung Raja', 'Kuala Dungun', 'Kuala Berang', 'Chukai', 'Kuala Nerus', 'Kuala Terengganu', 'Marang', 'Bandar Permaisuri']
+  };
+  $scope.states = Object.keys($scope.districts);
+  $scope.selectedStatesCities = [];
+
   $scope.meal = ['Breakfast','Lunch','Dinner'];
   $scope.cuisine = ['Arabian','Chinese','Indian','Indonesian','Malaysian','Thailand'];
-  $scope.names = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
+  $scope.foods = [];
+  $scope.foodList = [];
+
+  HttpService.getFoods().then(function(response){
+    $scope.foods = response.data.food;
+    for(var i=0; i<$scope.foods.length; i++){
+      $scope.foodList[i] = $scope.foods[i].food_name;
+    }
+  });
 
   $ionicModal.fromTemplateUrl('modal.html', function(modal) {
     $scope.modalCtrl = modal;
@@ -269,10 +305,10 @@ angular.module('app.controllers', [])
     focusFirstInput: true
   });
 
-  $scope.statesData = {"msg" : 'Any'};
-  $scope.cityData = {"msg" : 'Any'};
-  $scope.mealData = {"msg" : 'Any'};
-  $scope.cuisineData = {"msg" : 'Any'};
+  $scope.statesData = {data: 'Any'};
+  $scope.cityData = {data: 'Any'};
+  $scope.mealData = {data: 'Any'};
+  $scope.cuisineData = {data: 'Any'};
 
 
   
@@ -280,7 +316,9 @@ angular.module('app.controllers', [])
     $scope.modalCtrl.show();
   };
 
-   $scope.openCity = function() {          
+   $scope.openCity = function() {   
+    $scope.selectedStatesCities = $scope.districts[$scope.statesData.data];
+    console.log($scope.selectedStatesCities)      
     $scope.modalcityCtrl.show();
   };
 
@@ -321,23 +359,23 @@ angular.module('app.controllers', [])
     $scope.modalcuisineCtrl.hide();
   };
   
-  $scope.doSomething = function(item) {
-    $scope.statesData.msg = item;
+  $scope.doSelectStates = function(item) {
+    $scope.statesData.data = item;
     $scope.modalCtrl.hide();
   };
 
   $scope.doSelectCity = function(item) {
-    $scope.cityData.msg = item;
+    $scope.cityData.data = item;
     $scope.modalcityCtrl.hide();
   };
 
   $scope.doSelectMeal = function(item) {
-    $scope.mealData.msg = item;
+    $scope.mealData.data = item;
     $scope.modalmealCtrl.hide();
   };
 
   $scope.doSelectCuisine = function(item) {
-    $scope.cuisineData.msg = item;
+    $scope.cuisineData.data = item;
     $scope.modalcuisineCtrl.hide();
   };
 

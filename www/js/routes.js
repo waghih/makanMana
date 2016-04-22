@@ -57,10 +57,10 @@ angular.module('app.routes', [])
     }
     
   })
-  .state('menu2.about',{
+  .state('menu.about',{
     url:'/about',
     views:{
-      'side-menu2':{
+      'side-menu':{
       templateUrl: 'templates/about.html'
       }
     }
@@ -76,10 +76,10 @@ angular.module('app.routes', [])
     templateUrl: 'templates/menu2.html',
     abstract:true
   })
-  .state('menu2.contact',{
+  .state('menu.contact',{
     url:'/contact',
     views:{
-      'side-menu2':{
+      'side-menu':{
         templateUrl: 'templates/feedback.html'
       }
     }
@@ -121,4 +121,9 @@ angular.module('app.routes', [])
   $urlRouterProvider.otherwise('/side-menu/home'); 
     
 
+})
+.config(function($ionicConfigProvider) {
+
+  // note that you can also chain configs
+  $ionicConfigProvider.backButton.text('Back').previousTitleText(false);
 });

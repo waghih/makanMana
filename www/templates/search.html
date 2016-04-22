@@ -28,7 +28,7 @@
         <!-- <div style="text-align:right"> -->
           <div class="modal-select">
             <!-- <div class="button"> -->
-              <button class="button button-clear button-dark" ng-click="openStates()">{{statesData.msg}}</button>
+              <button class="button button-clear button-dark" ng-click="openStates()">{{statesData.data}}</button>
             <!-- </div>             -->
           </div>
       </label>
@@ -39,18 +39,18 @@
         </div>
         <div class="modal-select">
             <!-- <div class="button"> -->
-              <button class="button button-clear button-dark" ng-click="openCity()">{{cityData.msg}}</button>
+              <button class="button button-clear button-dark" ng-click="openCity()">{{cityData.data}}</button>
             <!-- </div>             -->
           </div>
       </label>
       
       <label class="item item-input item-select" >
         <div class="input-label" style="display:block;">
-          Type of Meal
+          Meal
         </div>
         <div class="modal-select">
             <!-- <div class="button"> -->
-              <button class="button button-clear button-dark" ng-click="openMeal()">{{mealData.msg}}</button>
+              <button class="button button-clear button-dark" ng-click="openMeal()">{{mealData.data}}</button>
             <!-- </div>             -->
           </div><!-- 
         <select>
@@ -71,15 +71,19 @@
         <!-- <div style="text-align:right"> -->
           <div class="modal-select">
             <!-- <div class="button"> -->
-              <button class="button button-clear button-dark" ng-click="openCuisine()">{{cuisineData.msg}}</button>
+              <button class="button button-clear button-dark" ng-click="openCuisine()">{{cuisineData.data}}</button>
             <!-- </div>             -->
           </div>
       </label>
+      <label class="item-input item-stacked-label">
+        <span class="input-label">Food Preference</span>
+        <input auto-complete ui-items="foodList" ng-model="selected" placeholder="Your desired food">        
+      </label>
 
     </ion-item>
-    <ion-item>
-      <!-- <input auto-complete ui-items="names" ng-model="selected"> -->
-    </ion-item> 
+   <!--  <ion-item>
+      
+    </ion-item>  -->
     <ion-item>
       <div class="item-toggle">
          Halal
@@ -114,7 +118,7 @@
         </ion-header-bar>
         <ion-content>
           <div class="list">
-            <ion-item ng-model="modalData.msg" ng-repeat="item in states" ng-click="doSomething(item)">
+            <ion-item ng-model="statesData.data" ng-repeat="item in states" ng-click="doSelectStates(item)">
               {{item}}
             </ion-item>
           </div>
@@ -130,7 +134,7 @@
         </ion-header-bar>
         <ion-content>
           <div class="list">
-            <ion-item ng-model="modalData.msg" ng-repeat="item in city" ng-click="doSelectCity(item)">
+            <ion-item ng-model="cityData.data" ng-repeat="item in selectedStatesCities" ng-click="doSelectCity(item)">
               {{item}}
             </ion-item>
           </div>
@@ -146,7 +150,7 @@
         </ion-header-bar>
         <ion-content>
           <div class="list">
-            <ion-item ng-model="modalData.msg" ng-repeat="item in meal" ng-click="doSelectMeal(item)">
+            <ion-item ng-model="modalData.data" ng-repeat="item in meal" ng-click="doSelectMeal(item)">
               {{item}}
             </ion-item>
           </div>
@@ -162,7 +166,7 @@
         </ion-header-bar>
         <ion-content>
           <div class="list">
-            <ion-item ng-model="modalData.msg" ng-repeat="item in cuisine" ng-click="doSelectCuisine(item)">
+            <ion-item ng-model="modalData.data" ng-repeat="item in cuisine" ng-click="doSelectCuisine(item)">
               {{item}}
             </ion-item>
           </div>

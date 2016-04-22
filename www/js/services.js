@@ -17,12 +17,28 @@ angular.module('app.services', [])
        }); 
     },
     getRestaurant: function(restaurantId){
+      console.log(restaurants);
       for(var i=0;i<restaurants.length;i++){
+        console.log(restaurants[i].id);
         if(restaurants[i].id == restaurantId){
           return restaurants[i];
-          console.log('Get Restaurant', restaurants[i]);
+          // console.log('Get Restaurant', restaurants[i]);
         }
       }
+    },
+    getRestaurantsByMeal: function(meal){
+      return $http.get(baseUrl+'getRestaurantsByMeal.php?meal='+meal)
+      .then(function(response){
+          restaurants = response.data.result; 
+          console.log(restaurants);       
+          return response;
+      });
+    },
+    getFoods: function(){
+      return $http.get(baseUrl+'getAllFoods.php')
+      .then(function(response){
+          return response;
+      });
     },
     getRestaurantReview: function(restaurantId){
       return $http.get(baseUrl+'getReview.php?id='+restaurantId)

@@ -1,5 +1,9 @@
 <ion-view title="GoEat">	
 
+  <ion-nav-buttons side="right">
+    <a class="button button-balanced icon ion-search" align="right" ui-sref="menu.search"></a>
+  </ion-nav-buttons>
+
     <div class="tabs-striped tabs-top tabs-background-balanced tabs-color-light">
       <div class="tabs">
         <a class="tab-item" ng-class="{'tab-item': !breakfastActive, 'tab-item active': breakfastActive}" ng-click="breakfastTab()" href="#/">
