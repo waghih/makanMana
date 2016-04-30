@@ -47,6 +47,15 @@ angular.module('app.routes', [])
       }
     }
   })
+  .state('menu.findRestaurant',{
+    url:'/findRestaurant',
+    views:{
+      'side-menu':{
+        templateUrl: 'templates/restaurant_found.html',
+        controller: 'FoundCtrl'
+      }
+    }
+  })
   .state('menu.reviews',{
     url:'/reviews/:restaurantId',
     views:{
@@ -63,61 +72,23 @@ angular.module('app.routes', [])
       'side-menu':{
       templateUrl: 'templates/about.html'
       }
-    }
-    
+    }    
   })
   .state('menu', {
     url: '/side-menu',
     templateUrl: 'templates/menu.html',
     abstract:true
   })
-  .state('menu2',{
-    url:'/side-menu2',
-    templateUrl: 'templates/menu2.html',
-    abstract:true
-  })
   .state('menu.contact',{
     url:'/contact',
     views:{
       'side-menu':{
-        templateUrl: 'templates/feedback.html'
+        templateUrl: 'templates/feedback.html',
+        controller: 'FeedbackCtrl'
       }
     }
   });
-  // .state('');
-
-  // .state('tabs', {
-  //     url: "/tab",
-  //     abstract: true,
-  //     templateUrl: "templates/home.html"
-  //   })
-  //   .state('home.breakfast', {
-  //     url: "/breakfast",
-  //     views: {
-  //       'breakfast-tab': {
-  //         templateUrl: "templates/home.html",
-  //         controller: 'AppCtrl'
-  //       }
-  //     }
-  //   })
-  //   .state('home.lunch', {
-  //     url: "/lunch",
-  //     views: {
-  //       'lunch-tab': {
-  //         templateUrl: "templates/home.html",
-  //         controller: 'AppCtrl'
-  //       }
-  //     }
-  //   })
-  //   .state('home.dinner', {
-  //     url: "/dinner",
-  //     views: {
-  //       'dinner-tab': {
-  //         templateUrl: "templates/home.html",
-  //         controller: 'AppCtrl'
-  //       }
-  //     }
-  //   });
+  
   $urlRouterProvider.otherwise('/side-menu/home'); 
     
 

@@ -10,25 +10,26 @@
     <ion-item>
       <h2> {{ restaurant.name }} </h2>
     </ion-item>
-    
+
     <div id="map" data-tap-disabled="true"></div>
+   
     <ion-item>
       <div class="row">
         <div class="col col-33 text-center">
-          <a class="button button-clear button-balanced tab-button tab-button-checkin">
-            <i class="ion-ios-location-outline balanced"></i>
-            <p>Check In</p>
+          <a class="button button-clear button-balanced tab-button tab-button-checkin" ng-click="shareViaTwitter(restaurant)">
+            <i class="ion-android-share-alt balanced"></i>
+            <p>Share</p>
           </a>          
         </div>
         <div class="col col-33 text-center">
-          <a class="button button-clear button-balanced tab-button tab-button-checkin">
-            <i class="ion-ios-telephone-outline balanced"></i>
+          <a class="button button-clear button-balanced tab-button tab-button-checkin" href="tel:+60137465614">
+            <i class="ion-android-call balanced"></i>
             <p>Phone Call</p>
           </a>          
         </div>
         <div class="col col-33 text-center">
           <a class="button button-clear button-balanced tab-button" ui-sref="menu.ratingForm({restaurantId:restaurant.id})">          
-            <i class="ion-ios-compose-outline balanced"></i>
+            <i class="ion-compose balanced"></i>
             <p>Post Review</p>
           </a>
         </div>
@@ -46,7 +47,7 @@
         <p>Distances: </p>
         <h3> {{ distance.toFixed(3) }} km</h3>
     </ion-item>
-    <ion-item>
+    <ion-item style="text-align:center;">
       <h1 class="customRating">{{restaurant.rating.toFixed(1)}}
         <span>
           <rating class="averageRating" ng-model="restaurant.rating" max="rating.max" readonly="readOnly"></rating>

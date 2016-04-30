@@ -1,0 +1,34 @@
+<ion-view view-title="GoBite">
+
+  <ion-nav-bar class="bar-balanced" align-title="center">
+    <ion-nav-back-button class="button-clear">
+      <i class="on-ios-arrow-back"></i>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content>
+			<ion-item class="customCard" ng-repeat="item in items | orderBy:'distance':reverse" ui-sref="menu.restaurant({restaurantId:item.id})">
+        <div class="list card customCard">
+
+          <div class="item">
+            <h2>{{ item.name }}</h2>
+            <p>Distance: {{ item.distance.toFixed(3) }} km</p>
+          </div>
+
+          <div class="item item-image">
+            <img src="http://www.julios.co.za/wp-content/uploads/2012/10/restaurant.jpeg">
+          </div>
+
+          <div class="item">
+            <h1>{{item.rating.toFixed(1)}}   <span><i class="customIcon icon ion-star assertive"></i></span></h1>
+          </div>
+      
+
+        </div>
+
+
+				<!-- <rating ng-model="item.rating" max="rating.max" readonly="readOnly"></rating> -->
+				<!-- </a> -->
+			</ion-item>
+		<!-- </ion-list> -->
+	</ion-content>
+</ion-view>

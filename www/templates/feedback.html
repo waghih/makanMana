@@ -10,24 +10,26 @@
 	    <div style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);">
             <!-- <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i> -->
             <img class="image" src="/img/logo-goeat.jpg"></img>
-        </div>
-	    <rating class="customStar" ng-model="rating.rate" max="rating.max"></rating>
-	    
+        </div>	    
 	    <form class="list" name="feedback">
+	    <label class="item item-input item-floating-label" name="subject">
+	          <span class="input-label">Subject:</span>
+	          <input type="text" ng-model="feedbackData.subject" placeholder="Subject:">
+	      </label>
 	      <label class="item item-input item-floating-label" name="name">
 	          <span class="input-label">Name:</span>
-	          <input type="text" placeholder="Name:">
+	          <input type="text" ng-model="feedbackData.username" placeholder="Name:">
 	      </label>
 	      <label class="item item-input item-floating-label" name="email">
 	          <span class="input-label">Email:</span>
-	          <input type="text" placeholder="Email:">
+	          <input type="text" ng-model="feedbackData.email" placeholder="Email:">
 	      </label> 
 	      <label class="item item-input item-floating-label" name="message">
 	          <span class="input-label">Message:</span>
-		    <textarea placeholder="Message:"></textarea>
+		      <textarea  ng-model="feedbackData.message" placeholder="Message:"></textarea>
 		  </label>    
 	    </form>
-	    <a ng-click="emailContactDetails()" id="sendFeedback" class="button button-balanced  button-block">Send!</a>
+	    <a ng-click="sendFeedback()" id="sendFeedback" class="button button-balanced  button-block">Send!</a>
 	    </ion-item>
 	  </ion-content>
 </ion-view>

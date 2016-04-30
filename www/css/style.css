@@ -66,37 +66,36 @@
     margin-top: -20px;
 }
 
-.float-button { 
-    background-color: #FFFFFF;
-    /* opacity: 0.9; */
-    color: white;
-    border-radius: 50%;
-    /* border-radius: 15% 0 0 0; */
-    width: 65px;
-    height: 65px;
-     padding: 25px; 
-    font-size: 80px;
-    position: fixed;
-    bottom: 5%;
-    right: 5%;
-    z-index: 1000;
+.float-button {
+ 
+background-color:#fff;
+color: white;
+border-radius: 50%;
+/*border-radius:15% 0 0 0;*/
+width: 30px;
+padding: 25px;
+font-size: 40px;
+position: fixed;
+bottom: 5%; /* Adjust height */
+right: 5%; /* Adjust position */
+z-index: 1000;
 }
  
 .float-button .height_fix {
-    margin-top: 100%;
-    border: 1px solid red;
+  margin-top: 100%;
+  border: 3px solid #53C2D1;
 }
  
 .float-button .content {
-    position: absolute;
-    left: -2%;
-    top: -5%;
-    /* right: -5%; */
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    margin-top: -5px;
-    color: white;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 100%;
+  width: 100%;font-size: 72px;
+  text-align: center;
+  margin-top: -40px;
+  margin-left: -40px;
+  color: white;
 }
 
 .customIcon{
