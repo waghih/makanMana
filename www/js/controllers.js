@@ -100,7 +100,7 @@ angular.module('app.controllers', [])
   $scope.readOnly = true;
 })
 
-.controller('RestaurantCtrl', function($scope, $stateParams, HttpService, $http, $cordovaSocialSharing, $cordovaGeolocation, DistanceService, $ionicLoading) {
+.controller('RestaurantCtrl', function($scope, $stateParams, HttpService, $http, $cordovaSocialSharing, $cordovaGeolocation, $cordovaLaunchNavigator, DistanceService, $ionicLoading) {
   $scope.rating = {};
   $scope.rating.max = 5;
   $scope.readOnly = true;
@@ -211,7 +211,29 @@ angular.module('app.controllers', [])
       console.log('Success');
     }, function(err) {
       // An error occurred. Show a message to the user
-    });  }
+    });  
+  }
+
+  $scope.navigate = function(latitude,longitude){
+    
+    var options = {timeout: 10000, enableHighAccuracy: false};
+    var destination = [latitude,longitude];
+    console.log(destination);
+    $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+      
+      var start = [position.coords.latitude,position.coords.longitude];
+      
+      $cordovaLaunchNavigator.navigate(destination, start).then(function() {
+        console.log("Navigator launched");
+      }, function (err) {
+        console.error(err);
+      });
+
+      }, function(error){
+          console.log("Could not get location");
+      }
+    );
+  }
 
 })
 
