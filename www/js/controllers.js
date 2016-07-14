@@ -302,7 +302,7 @@ angular.module('app.controllers', [])
   $scope.selectedStatesCities = [];
 
   $scope.meal = ['Breakfast','Lunch','Dinner'];
-  $scope.cuisine = ['Chinese','Chinese Muslim','Indian','Indonesian','Malaysian','Middle Eastern','Thailand'];
+  $scope.cuisine = ['Chinese','Chinese Muslim','Indian','Indonesian','Malay','Middle Eastern','Thailand'];
   $scope.foods = [];
   $scope.foodList = [];
 
